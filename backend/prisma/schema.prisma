@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Instrument {
+  id           String    @id @default(uuid())
+  manufacturer String
+  model        String
+  description  String?
+  machines     Machine[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Machine {
+  id               String                @id @default(uuid())
+  instrumentId     String                @map("instrument_id")
+  instrument       Instrument            @relation(fields: [instrumentId], references: [id])
+  serialNumber     String                @unique @map("serial_number")
+  firmwareVersion  String                @map("firmware_version")
+  installationDate DateTime?             @map("installation_date")
+  modules          MachineModule[]
+  sessions         InterventionSession[]
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+}
+
+model Module {
+  id          String          @id @default(uuid())
+  name        String          @unique
+  description String?
+  machines    MachineModule[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model MachineModule {
+  id        String   @id @default(uuid())
+  machineId String   @map("machine_id")
+  machine   Machine  @relation(fields: [machineId], references: [id])
+  moduleId  String   @map("module_id")
+  module    Module   @relation(fields: [moduleId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([machineId, moduleId])
+}
+
+model InterventionSession {
+  id           String    @id @default(uuid())
+  machineId    String    @map("machine_id")
+  machine      Machine   @relation(fields: [machineId], references: [id])
+  startedAt    DateTime  @default(now()) @map("started_at")
+  engineerName String    @map("engineer_name")
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
