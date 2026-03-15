@@ -68,6 +68,7 @@ function MachineContextForm() {
 
       // 3. Store context locally for future use (AI agents phase)
       const context = {
+        instrument_id: machine.instrumentId,
         instrument: instrument?.model,
         serial_number: machine.serialNumber,
         firmware: machine.firmwareVersion,
@@ -78,7 +79,7 @@ function MachineContextForm() {
 
       // 4. Navigate to success or future AI screen
       alert('Intervention session started successfully!');
-      router.push('/');
+      router.push(`/intervention-session/${session.id}/troubleshooting`);
     } catch (error) {
       console.error(error);
       alert('Failed to start intervention. Please check your data.');

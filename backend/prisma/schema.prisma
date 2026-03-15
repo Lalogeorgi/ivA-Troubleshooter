@@ -8,13 +8,17 @@ datasource db {
 }
 
 model Instrument {
-  id           String    @id @default(uuid())
-  manufacturer String
-  model        String
-  description  String?
-  machines     Machine[]
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id               String            @id @default(uuid())
+  manufacturer     String
+  model            String
+  description      String?
+  machines         Machine[]
+  errorCodes       ErrorCode[]
+  symptoms         Symptom[]
+  procedures       Procedure[]
+  serviceBulletins ServiceBulletin[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
 model Machine {
@@ -59,4 +63,106 @@ model InterventionSession {
   notes        String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+}
+
+model ErrorCode {
+  id           String               @id @default(uuid())
+  instrumentId String               @map("instrument_id")
+  instrument   Instrument           @relation(fields: [instrumentId], references: [id])
+  code         String
+  description  String
+  procedures   ProcedureErrorCode[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
+  @@unique([instrumentId, code])
+}
+
+model Symptom {
+  id           String             @id @default(uuid())
+  instrumentId String             @map("instrument_id")
+  instrument   Instrument         @relation(fields: [instrumentId], references: [id])
+  description  String
+  procedures   ProcedureSymptom[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+}
+
+model Procedure {
+  id               String                     @id @default(uuid())
+  instrumentId     String                     @map("instrument_id")
+  instrument       Instrument                 @relation(fields: [instrumentId], references: [id])
+  title            String
+  description      String?
+  firmwareMin      String?                    @map("firmware_min")
+  firmwareMax      String?                    @map("firmware_max")
+  procedureType    String                     @map("procedure_type") // troubleshooting | calibration | installation | upgrade | maintenance
+  steps            ProcedureStep[]
+  errorCodes       ProcedureErrorCode[]
+  symptoms         ProcedureSymptom[]
+  serviceBulletins ServiceBulletinProcedure[]
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
+}
+
+model ProcedureStep {
+  id                String    @id @default(uuid())
+  procedureId       String    @map("procedure_id")
+  procedure         Procedure @relation(fields: [procedureId], references: [id])
+  stepNumber        Int       @map("step_number")
+  instruction       String
+  warning           String?
+  referenceDocument String?   @map("reference_document")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@unique([procedureId, stepNumber])
+}
+
+model ProcedureErrorCode {
+  id          String    @id @default(uuid())
+  procedureId String    @map("procedure_id")
+  procedure   Procedure @relation(fields: [procedureId], references: [id])
+  errorCodeId String    @map("error_code_id")
+  errorCode   ErrorCode @relation(fields: [errorCodeId], references: [id])
+  createdAt   DateTime  @default(now())
+
+  @@unique([procedureId, errorCodeId])
+}
+
+model ProcedureSymptom {
+  id          String    @id @default(uuid())
+  procedureId String    @map("procedure_id")
+  procedure   Procedure @relation(fields: [procedureId], references: [id])
+  symptomId   String    @map("symptom_id")
+  symptom     Symptom   @relation(fields: [symptomId], references: [id])
+  createdAt   DateTime  @default(now())
+
+  @@unique([procedureId, symptomId])
+}
+
+model ServiceBulletin {
+  id           String                     @id @default(uuid())
+  instrumentId String                     @map("instrument_id")
+  instrument   Instrument                 @relation(fields: [instrumentId], references: [id])
+  bulletinCode String                     @map("bulletin_code")
+  title        String
+  description  String?
+  releaseDate  DateTime                   @map("release_date")
+  procedures   ServiceBulletinProcedure[]
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @updatedAt
+
+  @@unique([instrumentId, bulletinCode])
+}
+
+model ServiceBulletinProcedure {
+  id                String          @id @default(uuid())
+  serviceBulletinId String          @map("service_bulletin_id")
+  serviceBulletin   ServiceBulletin @relation(fields: [serviceBulletinId], references: [id])
+  procedureId       String          @map("procedure_id")
+  procedure         Procedure       @relation(fields: [procedureId], references: [id])
+  createdAt         DateTime        @default(now())
+
+  @@unique([serviceBulletinId, procedureId])
 }
