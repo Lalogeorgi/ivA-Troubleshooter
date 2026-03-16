@@ -14,7 +14,9 @@ export class TroubleshootingService {
 
   async getProcedures(params: GetProceduresParams) {
     if (!params.instrumentId || !params.firmwareVersion) {
-      throw new BadRequestException('instrument_id and firmware_version are required');
+      throw new BadRequestException(
+        'instrument_id and firmware_version are required',
+      );
     }
 
     // Convert firmware to a comparable format (simple float parsing for standard "X.Y" format)
@@ -54,18 +56,21 @@ export class TroubleshootingService {
           orderBy: { stepNumber: 'asc' },
         },
         errorCodes: {
-          include: { errorCode: true }
+          include: { errorCode: true },
         },
         symptoms: {
-          include: { symptom: true }
-        }
+          include: { symptom: true },
+        },
       },
     });
 
-    console.log('Found completely matching procedures (pre-fw filter):', procedures.map(p => p.id));
+    console.log(
+      'Found completely matching procedures (pre-fw filter):',
+      procedures.map((p) => p.id),
+    );
 
     // Filter by firmware in memory due to Prisma SQLite lacking complex float comparison natively for string fields
-    const finalResults = procedures.filter(proc => {
+    const finalResults = procedures.filter((proc) => {
       // If the procedure has no firmware bounds, it is compatible
       if (!proc.firmwareMin && !proc.firmwareMax) return true;
 
@@ -75,7 +80,10 @@ export class TroubleshootingService {
       return fw >= min && fw <= max;
     });
 
-    console.log('Final results after FW filter:', finalResults.map(p => p.id));
+    console.log(
+      'Final results after FW filter:',
+      finalResults.map((p) => p.id),
+    );
     return finalResults;
   }
 }

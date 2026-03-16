@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsArray, IsOptional, IsUUID } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsArray,
+  IsOptional,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateMachineDto {
   @IsUUID()

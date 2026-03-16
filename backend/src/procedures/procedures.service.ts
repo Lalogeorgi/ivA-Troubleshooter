@@ -20,9 +20,9 @@ export class ProceduresService {
       where: { id },
       include: {
         steps: {
-          orderBy: { stepNumber: 'asc' }
-        }
-      }
+          orderBy: { stepNumber: 'asc' },
+        },
+      },
     });
 
     if (!procedure) {

@@ -7,14 +7,17 @@ export class MachinesService {
   constructor(private prisma: PrismaService) {}
 
   async upsert(createMachineDto: CreateMachineDto) {
-    const { instrumentId, serialNumber, firmwareVersion, moduleIds } = createMachineDto;
+    const { instrumentId, serialNumber, firmwareVersion, moduleIds } =
+      createMachineDto;
 
     // Verify instrument exists
     const instrument = await this.prisma.instrument.findUnique({
       where: { id: instrumentId },
     });
     if (!instrument) {
-      throw new NotFoundException(`Instrument with ID ${instrumentId} not found`);
+      throw new NotFoundException(
+        `Instrument with ID ${instrumentId} not found`,
+      );
     }
 
     // Upsert machine based on serial number

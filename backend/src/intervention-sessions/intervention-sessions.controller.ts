@@ -4,7 +4,9 @@ import { CreateInterventionSessionDto } from './dto/create-intervention-session.
 
 @Controller('intervention-sessions')
 export class InterventionSessionsController {
-  constructor(private readonly interventionSessionsService: InterventionSessionsService) {}
+  constructor(
+    private readonly interventionSessionsService: InterventionSessionsService,
+  ) {}
 
   @Post()
   create(@Body() createDto: CreateInterventionSessionDto) {

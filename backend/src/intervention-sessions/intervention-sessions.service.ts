@@ -56,7 +56,9 @@ export class InterventionSessionsService {
     });
 
     if (!session) {
-      throw new NotFoundException(`Intervention session with ID ${id} not found`);
+      throw new NotFoundException(
+        `Intervention session with ID ${id} not found`,
+      );
     }
 
     return session;

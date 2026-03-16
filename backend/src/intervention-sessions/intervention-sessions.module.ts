@@ -4,6 +4,6 @@ import { InterventionSessionsService } from './intervention-sessions.service';
 
 @Module({
   controllers: [InterventionSessionsController],
-  providers: [InterventionSessionsService]
+  providers: [InterventionSessionsService],
 })
 export class InterventionSessionsModule {}

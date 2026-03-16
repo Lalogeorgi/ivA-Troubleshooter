@@ -12,9 +12,23 @@ import { ProceduresModule } from './procedures/procedures.module';
 import { ProcedureStepsModule } from './procedure-steps/procedure-steps.module';
 import { ServiceBulletinsModule } from './service-bulletins/service-bulletins.module';
 import { TroubleshootingModule } from './troubleshooting/troubleshooting.module';
+import { KnowledgeSearchModule } from './knowledge-search/knowledge-search.module';
 
 @Module({
-  imports: [PrismaModule, InstrumentsModule, MachinesModule, InterventionSessionsModule, ModulesModule, ErrorCodesModule, SymptomsModule, ProceduresModule, ProcedureStepsModule, ServiceBulletinsModule, TroubleshootingModule],
+  imports: [
+    PrismaModule,
+    InstrumentsModule,
+    MachinesModule,
+    InterventionSessionsModule,
+    ModulesModule,
+    ErrorCodesModule,
+    SymptomsModule,
+    ProceduresModule,
+    ProcedureStepsModule,
+    ServiceBulletinsModule,
+    TroubleshootingModule,
+    KnowledgeSearchModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

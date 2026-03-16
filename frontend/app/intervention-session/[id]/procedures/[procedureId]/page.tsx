@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { TroubleshootingProcedure } from '../../../../lib/api';
+import { TroubleshootingProcedure, fetchKnowledgeSearch } from '../../../../lib/api';
+import DocumentViewer from '../../../../../components/DocumentViewer';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
@@ -14,6 +15,21 @@ export default function ProcedureViewPage() {
 
   const [procedure, setProcedure] = useState<TroubleshootingProcedure | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedDoc, setSelectedDoc] = useState<{ title: string; chunk: string } | null>(null);
+
+  const handleOpenReference = async (reference: string) => {
+    try {
+      // To simulate opening the reference, we do a quick semantic search for it to get the chunk
+      const searchData = await fetchKnowledgeSearch({ query: reference });
+      if (searchData.length > 0) {
+        setSelectedDoc({ title: searchData[0].document_title, chunk: searchData[0].chunk_text });
+      } else {
+        setSelectedDoc({ title: reference, chunk: 'Document content not found in Vector DB for this reference.' });
+      }
+    } catch {
+      setSelectedDoc({ title: reference, chunk: 'Failed to retrieve document reference from the Knowledge Base.' });
+    }
+  };
 
   useEffect(() => {
     async function loadProcedure() {
@@ -120,12 +136,15 @@ export default function ProcedureViewPage() {
                     )}
 
                     {step.referenceDocument && (
-                      <div className="mt-3 flex items-center text-sm text-blue-600 font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <button 
+                        onClick={() => handleOpenReference(step.referenceDocument!)}
+                        className="mt-3 flex items-center text-sm text-blue-600 font-medium hover:text-blue-800 transition-colors bg-blue-50 hover:bg-blue-100 rounded-md px-3 py-1.5"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
                         </svg>
-                        Ref: {step.referenceDocument}
-                      </div>
+                        Reference: {step.referenceDocument}
+                      </button>
                     )}
                   </div>
                 </div>
@@ -134,6 +153,15 @@ export default function ProcedureViewPage() {
           )}
         </div>
       </div>
+      
+      {/* Document Viewer Modal Overlay */}
+      {selectedDoc && (
+        <DocumentViewer 
+          documentTitle={selectedDoc.title} 
+          chunkHighlight={selectedDoc.chunk} 
+          onClose={() => setSelectedDoc(null)} 
+        />
+      )}
     </div>
   );
 }

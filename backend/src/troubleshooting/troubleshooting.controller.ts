@@ -3,7 +3,9 @@ import { TroubleshootingService } from './troubleshooting.service';
 
 @Controller('troubleshooting')
 export class TroubleshootingController {
-  constructor(private readonly troubleshootingService: TroubleshootingService) {}
+  constructor(
+    private readonly troubleshootingService: TroubleshootingService,
+  ) {}
 
   @Get()
   async getTroubleshooting(

@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 model Instrument {
@@ -17,6 +19,7 @@ model Instrument {
   symptoms         Symptom[]
   procedures       Procedure[]
   serviceBulletins ServiceBulletin[]
+  documents        Document[]
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
 }
@@ -55,14 +58,14 @@ model MachineModule {
 }
 
 model InterventionSession {
-  id           String    @id @default(uuid())
-  machineId    String    @map("machine_id")
-  machine      Machine   @relation(fields: [machineId], references: [id])
-  startedAt    DateTime  @default(now()) @map("started_at")
-  engineerName String    @map("engineer_name")
+  id           String   @id @default(uuid())
+  machineId    String   @map("machine_id")
+  machine      Machine  @relation(fields: [machineId], references: [id])
+  startedAt    DateTime @default(now()) @map("started_at")
+  engineerName String   @map("engineer_name")
   notes        String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model ErrorCode {
@@ -108,11 +111,13 @@ model Procedure {
 model ProcedureStep {
   id                String    @id @default(uuid())
   procedureId       String    @map("procedure_id")
-  procedure         Procedure @relation(fields: [procedureId], references: [id])
+  procedure         Procedure @relation(fields: [procedureId], references: [id], onDelete: Cascade)
   stepNumber        Int       @map("step_number")
   instruction       String
   warning           String?
-  referenceDocument String?   @map("reference_document")
+  referenceDocId    String?   @map("reference_document_id")
+  referenceDocument Document? @relation(fields: [referenceDocId], references: [id], onDelete: SetNull)
+  referenceSection  String?   @map("reference_section")
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -159,10 +164,30 @@ model ServiceBulletin {
 model ServiceBulletinProcedure {
   id                String          @id @default(uuid())
   serviceBulletinId String          @map("service_bulletin_id")
-  serviceBulletin   ServiceBulletin @relation(fields: [serviceBulletinId], references: [id])
+  serviceBulletin   ServiceBulletin @relation(fields: [serviceBulletinId], references: [id], onDelete: Cascade)
   procedureId       String          @map("procedure_id")
-  procedure         Procedure       @relation(fields: [procedureId], references: [id])
+  procedure         Procedure       @relation(fields: [procedureId], references: [id], onDelete: Cascade)
   createdAt         DateTime        @default(now())
 
   @@unique([serviceBulletinId, procedureId])
+}
+
+model Document {
+  id             String          @id @default(uuid())
+  title          String
+  instrumentId   String?         @map("instrument_id")
+  instrument     Instrument?     @relation(fields: [instrumentId], references: [id], onDelete: SetNull)
+  documentType   String          @map("document_type") // service_manual, installation_guide, etc.
+  filePath       String          @map("file_path")
+  chunks         DocumentChunk[]
+  procedureSteps ProcedureStep[]
+  uploadedAt     DateTime        @default(now()) @map("uploaded_at")
+}
+
+model DocumentChunk {
+  id              String                 @id @default(uuid())
+  documentId      String                 @map("document_id")
+  document        Document               @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  chunkText       String                 @map("chunk_text")
+  embeddingVector Unsupported("vector")? @map("embedding_vector")
 }

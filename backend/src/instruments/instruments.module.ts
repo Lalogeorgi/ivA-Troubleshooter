@@ -4,6 +4,6 @@ import { InstrumentsService } from './instruments.service';
 
 @Module({
   controllers: [InstrumentsController],
-  providers: [InstrumentsService]
+  providers: [InstrumentsService],
 })
 export class InstrumentsModule {}
