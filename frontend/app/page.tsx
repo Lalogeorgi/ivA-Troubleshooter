@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import { Instrument, fetchInstruments } from './lib/api';
 import Link from 'next/link';
+import { Wrench, BookOpen, Layers, ShieldCheck, Cpu, ArrowRight, Activity, Search } from 'lucide-react';
 
-export default function MachineSelectionPage() {
+export default function HomePage() {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
@@ -22,77 +23,143 @@ export default function MachineSelectionPage() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <header className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="max-w-6xl mx-auto p-6 md:p-10 space-y-8">
+      {/* Top Banner */}
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">ivA Troubleshooter</h1>
-          <p className="text-slate-600">Select an instrument to start an intervention.</p>
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-blue-600 text-white shadow-md shadow-blue-200">
+              <Activity className="w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                ivA Service Intelligence
+              </h1>
+              <p className="text-slate-600 text-sm mt-0.5">
+                AI-native medical device field service engineering & diagnostic platform
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
+
+        <div className="flex items-center gap-3">
           <Link
             href="/vault"
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold rounded-xl shadow-sm flex items-center gap-2 transition"
+            className="px-4 py-2.5 rounded-xl border border-slate-300 hover:border-slate-400 bg-white text-slate-700 text-sm font-semibold shadow-sm flex items-center gap-2 transition"
           >
-            <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-            Knowledge Vault
+            <BookOpen className="w-4 h-4 text-emerald-600" />
+            <span>Knowledge Vault</span>
+          </Link>
+
+          <Link
+            href="/workspace"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-md shadow-blue-200 flex items-center gap-2 transition"
+          >
+            <Wrench className="w-4 h-4" />
+            <span>FSE Case Operations Center</span>
           </Link>
         </div>
       </header>
 
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search instruments (model or manufacturer)..."
-          className="w-full p-4 border border-slate-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-lg"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      {/* Featured Portals */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link
+          href="/workspace"
+          className="group p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl hover:shadow-2xl hover:border-cyan-500/50 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-4">
+              <Wrench className="w-3.5 h-3.5" />
+              <span>ACTIVE FSE INTERVENTION WORKSPACE</span>
+            </div>
+            <h2 className="text-2xl font-bold group-hover:text-cyan-300 transition-colors">
+              Field Service Engineer Case Center
+            </h2>
+            <p className="text-slate-400 text-sm mt-2 leading-relaxed">
+              Execute stateful diagnostic decision trees with live physical tolerance checks, multi-step AI reasoning, consequential action approval gates, and authoritative Return-to-Service reports.
+            </p>
+          </div>
+          <div className="mt-6 flex items-center text-sm font-semibold text-cyan-400 group-hover:translate-x-1 transition-transform">
+            <span>Enter Case Operations</span>
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </div>
+        </Link>
+
+        <Link
+          href="/vault"
+          className="group p-6 rounded-2xl bg-gradient-to-br from-emerald-950/40 to-slate-900 text-white border border-emerald-900/40 shadow-xl hover:shadow-2xl hover:border-emerald-500/50 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-4">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>CLINICAL KNOWLEDGE VAULT</span>
+            </div>
+            <h2 className="text-2xl font-bold group-hover:text-emerald-300 transition-colors">
+              Enterprise Knowledge Graph
+            </h2>
+            <p className="text-slate-400 text-sm mt-2 leading-relaxed">
+              Explore 25 validated medical engineering Markdown entities and 151 typed graph relationships with bidirectional Obsidian wikilinks and layout-aware PDF provenance.
+            </p>
+          </div>
+          <div className="mt-6 flex items-center text-sm font-semibold text-emerald-400 group-hover:translate-x-1 transition-transform">
+            <span>Explore Knowledge Vault</span>
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </div>
+        </Link>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center p-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      {/* Instrument Fleet Selection */}
+      <div className="pt-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+          <div>
+            <h3 className="text-xl font-bold text-slate-900">Supported Diagnostic Equipment</h3>
+            <p className="text-xs text-slate-500">Select an instrument to inspect hardware hierarchy or start legacy intervention.</p>
+          </div>
+          <div className="relative w-full sm:w-72">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search equipment..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredInstruments.map((instrument) => (
-            <Link key={instrument.id} href={`/machine-context?instrumentId=${instrument.id}`}>
-              <div className="card h-full flex flex-col justify-between">
-                <div>
-                  <h2 className="text-xl font-bold text-slate-800">{instrument.model}</h2>
-                  <p className="text-blue-600 font-medium">{instrument.manufacturer}</p>
-                  <p className="text-slate-500 mt-2 text-sm line-clamp-2">
-                    {instrument.description}
-                  </p>
-                </div>
-                <div className="mt-4 flex items-center text-blue-600 font-semibold">
-                  Select Instrument
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
 
-      {!loading && filteredInstruments.length === 0 && (
-        <div className="text-center p-12 bg-slate-100 rounded-xl">
-          <p className="text-slate-500">No instruments found matching your search.</p>
-        </div>
-      )}
+        {loading ? (
+          <div className="flex justify-center p-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredInstruments.map((instrument) => (
+              <Link key={instrument.id} href={`/machine-context?instrumentId=${instrument.id}`}>
+                <div className="p-5 rounded-xl border border-slate-200 bg-white hover:border-blue-500 hover:shadow-md transition-all flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-blue-600 uppercase tracking-wider">
+                        {instrument.manufacturer}
+                      </span>
+                      <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                        {instrument.modality || 'Clinical Diagnostic'}
+                      </span>
+                    </div>
+                    <h4 className="text-lg font-bold text-slate-900 mt-1">{instrument.model}</h4>
+                    <p className="text-slate-600 text-xs mt-2 line-clamp-2 leading-relaxed">
+                      {instrument.description}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-blue-600">
+                    <span>Inspect Hierarchy & Subsystems</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

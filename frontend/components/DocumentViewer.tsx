@@ -9,7 +9,7 @@ interface DocumentViewerProps {
   chunkHighlight?: string;
   initialPage?: number;
   documentId?: string;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export default function DocumentViewer({
@@ -129,12 +129,14 @@ export default function DocumentViewer({
               </div>
             )}
 
-            <button 
-              onClick={onClose}
-              className="p-2 text-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-lg transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            {onClose && (
+              <button 
+                onClick={onClose}
+                className="p-2 text-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
           </div>
         </div>
 

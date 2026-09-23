@@ -45,6 +45,12 @@ export class ProvenanceIndexer {
     });
 
     if (document) {
+      if (instrumentId) {
+        document = await this.prisma.document.update({
+          where: { id: document.id },
+          data: { instrumentId },
+        });
+      }
       // Clear previous chunks and pages
       await this.prisma.documentChunk.deleteMany({ where: { documentId: document.id } });
       await this.prisma.documentPage.deleteMany({ where: { documentId: document.id } });

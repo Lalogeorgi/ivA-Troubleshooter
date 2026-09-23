@@ -133,6 +133,7 @@ model InstalledAsset {
   firmwareVersion String       @map("firmware_version")
   installationDate DateTime    @default(now()) @map("installation_date")
   status          String       @default("OPERATIONAL") // OPERATIONAL, DEGRADED, DOWN, MAINTENANCE
+  cases           ServiceCase[]
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
 }
@@ -252,6 +253,7 @@ model Procedure {
   firmwareMax      String?                    @map("firmware_max")
   procedureType    String                     @map("procedure_type") // troubleshooting | calibration | installation | upgrade | maintenance
   steps            ProcedureStep[]
+  stepNodes        DiagnosticStepNode[]
   errorCodes       ProcedureErrorCode[]
   symptoms         ProcedureSymptom[]
   serviceBulletins ServiceBulletinProcedure[]
@@ -382,5 +384,93 @@ model AgentExecutionTrace {
   @@index([sessionId])
   @@index([instrumentId])
 }
+
+// Stateful Diagnostic Decision Tree Node
+model DiagnosticStepNode {
+  id                  String     @id @default(uuid())
+  procedureId         String     @map("procedure_id")
+  procedure           Procedure  @relation(fields: [procedureId], references: [id], onDelete: Cascade)
+  nodeKey             String     @map("node_key") // e.g. "SAFETY_01", "CHECK_PRESSURE", "INSPECT_SEALS"
+  nodeType            String     @map("node_type") // ACTION, MEASUREMENT, DECISION, REPLACEMENT, SAFETY_CHECK
+  stepNumber          Int        @default(1) @map("step_number")
+  title               String
+  instruction         String
+  warning             String?
+  requiredTool        String?    @map("required_tool")
+  measurementTarget   String?    @map("measurement_target")
+  nominalMin          Float?     @map("nominal_min")
+  nominalMax          Float?     @map("nominal_max")
+  unit                String?
+  passNextNodeKey     String?    @map("pass_next_node_key")
+  failNextNodeKey     String?    @map("fail_next_node_key")
+  probableCauseOnFail String?    @map("probable_cause_on_fail")
+  recommendedPart     String?    @map("recommended_part")
+  requiresApproval    Boolean    @default(false) @map("requires_approval")
+  createdAt           DateTime   @default(now())
+
+  @@unique([procedureId, nodeKey])
+  @@index([procedureId])
+}
+
+// Field Service Engineer Operational Case
+model ServiceCase {
+  id                 String                @id @default(uuid())
+  caseNumber         String                @unique @map("case_number")
+  assetId            String                @map("asset_id")
+  asset              InstalledAsset        @relation(fields: [assetId], references: [id])
+  engineerId         String                @map("engineer_id")
+  engineerName       String                @map("engineer_name")
+  status             String                @default("ARRIVED") // ARRIVED, DIAGNOSING, AWAITING_PARTS, REPAIRING, VERIFYING, COMPLETED, ESCALATED
+  symptomDescription String                @map("symptom_description")
+  initialErrorCode   String?               @map("initial_error_code")
+  activeProcedureId  String?               @map("active_procedure_id")
+  currentNodeKey     String?               @map("current_node_key")
+  partsReplaced      Json?                 @map("parts_replaced")
+  measurements       Json?                 @map("measurements")
+  stepHistory        Json?                 @map("step_history")
+  finalDiagnosis     String?               @map("final_diagnosis")
+  resolutionNotes    String?               @map("resolution_notes")
+  customerSignOff    String?               @map("customer_sign_off")
+  approvals          CaseApprovalRequest[]
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@index([assetId])
+  @@index([status])
+}
+
+// Consequential Action Human-in-the-Loop Approval Gate
+model CaseApprovalRequest {
+  id              String      @id @default(uuid())
+  caseId          String      @map("case_id")
+  case            ServiceCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  actionType      String      @map("action_type") // REPLACE_PART, CHANGE_CONFIG, CLOSE_CASE, ESCALATE_R_AND_D
+  targetEntity    String      @map("target_entity") // e.g. "Pump P-102 Plunger Seal Kit (SP-948-230-01)"
+  justification   String
+  status          String      @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedBy      String?     @map("approved_by")
+  rejectionReason String?     @map("rejection_reason")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([caseId])
+}
+
+// 21 CFR Part 11 Tamper-Evident Cryptographic Audit Trail
+model ComplianceAuditEntry {
+  id             String   @id @default(uuid())
+  sequenceNumber Int      @default(autoincrement()) @map("sequence_number")
+  caseId         String?  @map("case_id")
+  actionType     String   @map("action_type") // STEP_RECORDED, PART_CONSUMED, APPROVAL_GRANTED, CONFIG_WRITTEN, REPORT_GENERATED
+  performedBy    String   @map("performed_by")
+  details        Json
+  previousHash   String   @map("previous_hash")
+  currentHash    String   @map("current_hash")
+  timestamp      DateTime @default(now())
+
+  @@index([caseId])
+  @@index([actionType])
+}
+
 
 

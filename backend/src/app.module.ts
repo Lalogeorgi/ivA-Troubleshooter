@@ -17,6 +17,9 @@ import { OntologyModule } from './ontology/ontology.module';
 import { VaultModule } from './vault/vault.module';
 import { DocumentsModule } from './knowledge-ingestion/documents.module';
 import { AgentModule } from './agent/agent.module';
+import { CasesModule } from './cases/cases.module';
+import { OfflineModule } from './offline/offline.module';
+import { AuditModule } from './audit/audit.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { AgentModule } from './agent/agent.module';
     VaultModule,
     DocumentsModule,
     AgentModule,
+    CasesModule,
+    OfflineModule,
+    AuditModule,
     InstrumentsModule,
     MachinesModule,
     InterventionSessionsModule,

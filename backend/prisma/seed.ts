@@ -6,6 +6,9 @@ async function main() {
   console.log('--- Starting Comprehensive Seed: Medical Equipment Ontology & Baseline Knowledge ---');
 
   // Clean existing operational and ontology tables
+  await prisma.caseApprovalRequest.deleteMany();
+  await prisma.serviceCase.deleteMany();
+  await prisma.diagnosticStepNode.deleteMany();
   await prisma.knowledgeEdge.deleteMany();
   await prisma.componentFailureMode.deleteMany();
   await prisma.failureMode.deleteMany();
@@ -524,10 +527,136 @@ async function main() {
     ],
   });
 
+  // 9. Seed Diagnostic Step Decision Tree Nodes (E1045 Troubleshooting Workflow)
+  await prisma.diagnosticStepNode.createMany({
+    data: [
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_SAFETY_ISOLATE',
+        nodeType: 'SAFETY_CHECK',
+        stepNumber: 1,
+        title: 'Depressurize Fluidics & Safety Isolation',
+        instruction: 'Verify instrument status is in Service Mode. Position a dedicated 500mL biohazard waste collector beneath drain line W-02 before opening fluidics compartment door.',
+        warning: 'Biohazard risk: Wear nitrile gloves and safety eye protection when handling waste tubing.',
+        requiredTool: 'Biohazard Collector Container 500mL',
+        passNextNodeKey: 'STEP_PUMP_SUPPLY_VOLTAGE',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_PUMP_SUPPLY_VOLTAGE',
+        nodeType: 'MEASUREMENT',
+        stepNumber: 2,
+        title: 'Verify Syringe Stepper Motor 24V DC Rail',
+        instruction: 'Using a calibrated digital multimeter, measure DC voltage between test pin TP-PWR-01 and GND on the motor driver board.',
+        requiredTool: 'Digital Multimeter (Fluke 87V or equivalent)',
+        measurementTarget: 'DC Bus Voltage (TP-PWR-01)',
+        nominalMin: 23.5,
+        nominalMax: 24.5,
+        unit: 'VDC',
+        passNextNodeKey: 'STEP_PRESSURE_MANIFOLD_TEST',
+        failNextNodeKey: 'STEP_INSPECT_POWER_HARNESS',
+        probableCauseOnFail: 'Auxiliary 24V power supply rail drop or blown fuse F102 on PDB.',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_INSPECT_POWER_HARNESS',
+        nodeType: 'ACTION',
+        stepNumber: 3,
+        title: 'Inspect Power Harness & Driver Fuse',
+        instruction: 'Check connector CN-FL-PWR for secure seating. Inspect 24V fuse F102 on Power Distribution Board. Reseat cable harness and re-verify voltage.',
+        passNextNodeKey: 'STEP_PUMP_SUPPLY_VOLTAGE',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_PRESSURE_MANIFOLD_TEST',
+        nodeType: 'MEASUREMENT',
+        stepNumber: 4,
+        title: 'Fluidics Manifold Working Pressure Test',
+        instruction: 'Connect digital manometer P/N 948-CAL-01 to test port TP-FL-01. Initiate 30-second prime sequence at 200 uL/s.',
+        warning: 'Ensure bleed valve BV-01 is sealed tight prior to running the pump.',
+        requiredTool: 'Digital Manometer P/N 948-CAL-01',
+        measurementTarget: 'Hydraulic Manifold Operating Pressure',
+        nominalMin: 114.0,
+        nominalMax: 126.0,
+        unit: 'kPa',
+        passNextNodeKey: 'STEP_VERIFY_SENSOR_ZERO',
+        failNextNodeKey: 'STEP_INSPECT_PUMP_SEALS',
+        probableCauseOnFail: 'Degraded syringe pump seals causing internal cavitation and pressure loss.',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_INSPECT_PUMP_SEALS',
+        nodeType: 'APPROVAL_GATE',
+        stepNumber: 5,
+        title: 'Pump Plunger Seal Inspection & Replacement',
+        instruction: 'Physical inspection confirms fluid weeping at Syringe Pump P-102 lower barrel. Human authorization required before consuming and replacing pump seal kit SP-948-230-01.',
+        warning: 'Consequential action: Consumes billable spare part and resets maintenance lifecycle timer.',
+        requiresApproval: true,
+        recommendedPart: 'SP-948-230-01',
+        passNextNodeKey: 'STEP_PRESSURE_MANIFOLD_TEST',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_VERIFY_SENSOR_ZERO',
+        nodeType: 'MEASUREMENT',
+        stepNumber: 6,
+        title: 'Transducer Zero-Point Verification',
+        instruction: 'Open atmospheric vent valve V-03. Verify pressure transducer PS-23 reads baseline 0.0 kPa within sensor tolerance.',
+        measurementTarget: 'Sensor Atmospheric Baseline Zero',
+        nominalMin: -1.0,
+        nominalMax: 1.5,
+        unit: 'kPa',
+        passNextNodeKey: 'STEP_FINAL_PURGE_VERIFY',
+        failNextNodeKey: 'STEP_CALIBRATE_TRANSDUCER',
+        probableCauseOnFail: 'Transducer DC offset drift accumulated over operational hours.',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_CALIBRATE_TRANSDUCER',
+        nodeType: 'APPROVAL_GATE',
+        stepNumber: 7,
+        title: 'Pressure Sensor Zero Calibration Write',
+        instruction: 'Transducer zero-point offset requires software recalibration and writing new baseline offset to non-volatile EEPROM.',
+        warning: 'Consequential action: Overwrites factory calibration register on analog interface board.',
+        requiresApproval: true,
+        passNextNodeKey: 'STEP_FINAL_PURGE_VERIFY',
+      },
+      {
+        procedureId: procPumpCal.id,
+        nodeKey: 'STEP_FINAL_PURGE_VERIFY',
+        nodeType: 'ACTION',
+        stepNumber: 8,
+        title: 'Final Deionized Water Purge & System Prime',
+        instruction: 'Run 10 prime cycles with deionized water. Ensure bubble detector BD-01 remains clear of microbubbles and manifold holds target pressure.',
+        passNextNodeKey: null,
+      },
+    ],
+  });
+
+  // 10. Seed Initial Service Case for Demonstration
+  await prisma.serviceCase.create({
+    data: {
+      caseNumber: 'CASE-2026-1045',
+      assetId: assetMetro.id,
+      engineerId: 'FSE-704',
+      engineerName: 'Alex Mercer',
+      status: 'DIAGNOSING',
+      symptomDescription: 'Intermittent fluidics low pressure error E1045 during morning sample batch run.',
+      initialErrorCode: 'E1045',
+      activeProcedureId: procPumpCal.id,
+      currentNodeKey: 'STEP_SAFETY_ISOLATE',
+      stepHistory: [],
+      measurements: [],
+      partsReplaced: [],
+    },
+  });
+
   console.log('--- Comprehensive Seed Completed Successfully! ---');
   console.log('Instrument: BioMed Analyzer X200 with 6 subsystems, 6 components, sensors, actuators, and spare parts.');
   console.log('Sites: St. Jude Regional Medical Center, Metropolitan Central Laboratory.');
   console.log('Installed Assets: AX-004812, AX-005190.');
+  console.log('Diagnostic Tree: 8 steps seeded for procedure procPumpCal.');
+  console.log('Active Demonstration Case: CASE-2026-1045 on asset AX-004812.');
 }
 
 main()

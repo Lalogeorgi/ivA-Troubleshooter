@@ -1,0 +1,2274 @@
+{
+  "manifest": {
+    "formatVersion": "1.0.0",
+    "createdAt": "2026-09-23T03:44:41.094Z",
+    "packageType": "IVA_OFFLINE_BUNDLE",
+    "instrument": {
+      "id": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+      "model": "Analyzer X200",
+      "manufacturer": "BioMed Diagnostics Inc.",
+      "modality": "Clinical Chemistry"
+    },
+    "metrics": {
+      "subsystemsCount": 6,
+      "componentsCount": 6,
+      "sensorsCount": 2,
+      "actuatorsCount": 2,
+      "sparePartsCount": 3,
+      "diagnosticNodesCount": 8,
+      "knowledgeEdgesCount": 151,
+      "documentsCount": 1
+    },
+    "checksumSha256": "fefbb47e49e3c6d845d7d10e32f50199191d0cfd8384528d3843633d65e3b862"
+  },
+  "ontology": {
+    "instrument": {
+      "id": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+      "manufacturer": "BioMed Diagnostics Inc.",
+      "model": "Analyzer X200",
+      "modality": "Clinical Chemistry",
+      "description": "High-throughput random-access clinical chemistry analyzer processing up to 800 photometric tests/hour with dual pipettor arms, precision fluidics, and integrated wash station.",
+      "createdAt": "2026-09-23T03:31:09.740Z",
+      "updatedAt": "2026-09-23T03:31:09.740Z"
+    },
+    "subsystems": [
+      {
+        "id": "27697389-ba0b-4949-a8a9-14841194dfcd",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Fluidics & Hydraulics",
+        "code": "FLUIDICS",
+        "description": "Precision aspiration, reagent dispensing, hydraulic degasser, and waste disposal manifold.",
+        "createdAt": "2026-09-23T03:31:09.754Z",
+        "updatedAt": "2026-09-23T03:31:09.754Z"
+      },
+      {
+        "id": "1444d372-939c-4c03-8253-43c48cb7a3dc",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Optics & Photometry",
+        "code": "OPTICS",
+        "description": "Halogen source, holographic grating monochromator, flow cell, and 12-channel photodiode detector.",
+        "createdAt": "2026-09-23T03:31:09.756Z",
+        "updatedAt": "2026-09-23T03:31:09.756Z"
+      },
+      {
+        "id": "c8123542-77ef-47df-8fa4-01553c2f10c3",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Robotics & Motion Control",
+        "code": "ROBOTICS",
+        "description": "Dual XYZ pipettor arms, stepper motors, home optical flags, and collision sensor harness.",
+        "createdAt": "2026-09-23T03:31:09.757Z",
+        "updatedAt": "2026-09-23T03:31:09.757Z"
+      },
+      {
+        "id": "8115e996-ab31-4f8f-91ec-58d1438ba54c",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Thermal & Incubation",
+        "code": "THERMAL",
+        "description": "Precision 37.0°C reaction bath incubation with Peltier element and thermistor array.",
+        "createdAt": "2026-09-23T03:31:09.758Z",
+        "updatedAt": "2026-09-23T03:31:09.758Z"
+      },
+      {
+        "id": "6fa1c696-2431-4fc2-9b18-ad968604d9af",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Power & Electronics",
+        "code": "POWER",
+        "description": "24V industrial SMPS, motor drivers, CAN bus controller, and power distribution board.",
+        "createdAt": "2026-09-23T03:31:09.759Z",
+        "updatedAt": "2026-09-23T03:31:09.759Z"
+      },
+      {
+        "id": "cfba9bd8-01e5-461a-8c89-a5a30f3df253",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "name": "Consumables & Loader",
+        "code": "CONSUMABLES",
+        "description": "Reaction cuvette wheel, reagent carousel refrigeration, and tube barcode scanner.",
+        "createdAt": "2026-09-23T03:31:09.759Z",
+        "updatedAt": "2026-09-23T03:31:09.759Z"
+      }
+    ],
+    "assemblies": [
+      {
+        "id": "862895c3-c80e-4247-8d0c-1d684deb4fc7",
+        "subsystemId": "27697389-ba0b-4949-a8a9-14841194dfcd",
+        "name": "Hydraulic Manifold Block",
+        "locationCode": "BAY-FL-01",
+        "createdAt": "2026-09-23T03:31:09.760Z",
+        "updatedAt": "2026-09-23T03:31:09.760Z"
+      },
+      {
+        "id": "53b190f1-cb57-454a-8668-3c032a48076b",
+        "subsystemId": "1444d372-939c-4c03-8253-43c48cb7a3dc",
+        "name": "Photometer Optical Bench",
+        "locationCode": "BAY-OP-01",
+        "createdAt": "2026-09-23T03:31:09.773Z",
+        "updatedAt": "2026-09-23T03:31:09.773Z"
+      },
+      {
+        "id": "2b879f09-34aa-4737-a0b5-48ef96e5e56b",
+        "subsystemId": "c8123542-77ef-47df-8fa4-01553c2f10c3",
+        "name": "Sample Pipetting Tower",
+        "locationCode": "BAY-RB-01",
+        "createdAt": "2026-09-23T03:31:09.777Z",
+        "updatedAt": "2026-09-23T03:31:09.777Z"
+      }
+    ],
+    "components": [
+      {
+        "id": "c3a65c8c-60c3-47fe-b44b-2c3474c60480",
+        "assemblyId": "862895c3-c80e-4247-8d0c-1d684deb4fc7",
+        "name": "Syringe Dispense Pump P-102",
+        "partNumber": "948-230-01",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 6000,
+        "meshNodeId": "PUMP_P102",
+        "createdAt": "2026-09-23T03:31:09.762Z",
+        "updatedAt": "2026-09-23T03:31:09.762Z"
+      },
+      {
+        "id": "285de86c-a884-4a08-837a-691e2c69b296",
+        "assemblyId": "862895c3-c80e-4247-8d0c-1d684deb4fc7",
+        "name": "Manifold Pressure Sensor PS-23",
+        "partNumber": "948-510-23",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 12000,
+        "meshNodeId": "SENSOR_PS23",
+        "createdAt": "2026-09-23T03:31:09.767Z",
+        "updatedAt": "2026-09-23T03:31:09.767Z"
+      },
+      {
+        "id": "2f57a3ba-ac19-4994-a223-cbafc22b037d",
+        "assemblyId": "862895c3-c80e-4247-8d0c-1d684deb4fc7",
+        "name": "3-Way Pinch Valve V-04",
+        "partNumber": "948-112-04",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 8000,
+        "meshNodeId": "VALVE_V04",
+        "createdAt": "2026-09-23T03:31:09.772Z",
+        "updatedAt": "2026-09-23T03:31:09.772Z"
+      },
+      {
+        "id": "6633df96-efc5-4096-a417-ad5c2436358a",
+        "assemblyId": "53b190f1-cb57-454a-8668-3c032a48076b",
+        "name": "Tungsten-Halogen Lamp Assembly LS-01",
+        "partNumber": "832-100-01",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 2000,
+        "meshNodeId": "LAMP_LS01",
+        "createdAt": "2026-09-23T03:31:09.774Z",
+        "updatedAt": "2026-09-23T03:31:09.774Z"
+      },
+      {
+        "id": "5c00789b-27d1-40fb-a812-936ac5ceb5c5",
+        "assemblyId": "53b190f1-cb57-454a-8668-3c032a48076b",
+        "name": "Quartz Micro Flow Cell FC-01",
+        "partNumber": "832-340-02",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 15000,
+        "meshNodeId": "FLOWCELL_FC01",
+        "createdAt": "2026-09-23T03:31:09.776Z",
+        "updatedAt": "2026-09-23T03:31:09.776Z"
+      },
+      {
+        "id": "953c8ac0-b5e1-4f00-a551-e2f5513e1928",
+        "assemblyId": "2b879f09-34aa-4737-a0b5-48ef96e5e56b",
+        "name": "Sample Pipettor Arm ARM-01",
+        "partNumber": "720-410-01",
+        "isFieldReplaceable": true,
+        "expectedLifespanHours": 10000,
+        "meshNodeId": "ARM_SAMPLE",
+        "createdAt": "2026-09-23T03:31:09.778Z",
+        "updatedAt": "2026-09-23T03:31:09.778Z"
+      }
+    ],
+    "sensors": [
+      {
+        "id": "73bd37c4-cdf3-4e92-aa27-fb4094ad9b63",
+        "componentId": "285de86c-a884-4a08-837a-691e2c69b296",
+        "name": "Fluidics Line Pressure Transducer",
+        "telemetryTag": "FL_PRESS_01",
+        "signalType": "ANALOG_4_20MA",
+        "nominalMin": 114,
+        "nominalMax": 126,
+        "unit": "kPa",
+        "createdAt": "2026-09-23T03:31:09.769Z"
+      },
+      {
+        "id": "27c6d9e7-b66d-4dbe-9381-1fc6b5161ee1",
+        "componentId": "953c8ac0-b5e1-4f00-a551-e2f5513e1928",
+        "name": "Arm Home Optical Flag Sensor",
+        "telemetryTag": "ARM_Z_HOME",
+        "signalType": "DIGITAL",
+        "nominalMin": 0,
+        "nominalMax": 1,
+        "unit": "logic",
+        "createdAt": "2026-09-23T03:31:09.779Z"
+      }
+    ],
+    "actuators": [
+      {
+        "id": "0bb52d46-8ec6-4faa-9a31-fbaff05844b3",
+        "componentId": "c3a65c8c-60c3-47fe-b44b-2c3474c60480",
+        "name": "Syringe Plunger Stepper Motor",
+        "actuatorType": "STEPPER_MOTOR",
+        "controlProtocol": "CAN_BUS_NODE_12",
+        "createdAt": "2026-09-23T03:31:09.764Z"
+      },
+      {
+        "id": "f6bf4f41-0bfa-4850-b9d3-42462ca7ea97",
+        "componentId": "2f57a3ba-ac19-4994-a223-cbafc22b037d",
+        "name": "Pinch Solenoid Driver",
+        "actuatorType": "SOLENOID_VALVE",
+        "controlProtocol": "GPIO_HIGH_SIDE",
+        "createdAt": "2026-09-23T03:31:09.773Z"
+      }
+    ],
+    "spareParts": [
+      {
+        "id": "5cd40bed-5cf2-4781-a1e1-8dfda33e2bda",
+        "componentId": "c3a65c8c-60c3-47fe-b44b-2c3474c60480",
+        "oemPartNumber": "SP-948-230-01",
+        "description": "Complete Syringe Dispense Pump P-102 Replacement Kit with Seals",
+        "unitCost": 1250,
+        "inventoryMin": 2,
+        "createdAt": "2026-09-23T03:31:09.765Z"
+      },
+      {
+        "id": "169c148e-33a9-4e33-a267-4a616a018bd6",
+        "componentId": "285de86c-a884-4a08-837a-691e2c69b296",
+        "oemPartNumber": "SP-948-510-23",
+        "description": "Pressure Transducer PS-23 with O-Ring Calibrated Assembly",
+        "unitCost": 420,
+        "inventoryMin": 3,
+        "createdAt": "2026-09-23T03:31:09.771Z"
+      },
+      {
+        "id": "c6bc025a-0c17-412d-aa8b-98c32c2ffc89",
+        "componentId": "6633df96-efc5-4096-a417-ad5c2436358a",
+        "oemPartNumber": "SP-832-100-01",
+        "description": "12V 20W Pre-Focused Halogen Lamp Module",
+        "unitCost": 185,
+        "inventoryMin": 5,
+        "createdAt": "2026-09-23T03:31:09.775Z"
+      }
+    ],
+    "failureModes": [
+      {
+        "id": "7a2da322-36fa-46ae-ae9b-545e159c30dc",
+        "code": "FM-FLUIDICS-PRESSURE-DROP",
+        "title": "Manifold Hydraulic Pressure Drop",
+        "description": "Pressure oscillation or drop below 114 kPa caused by pump plunger seal degradation, tubing delamination, or valve seat obstruction.",
+        "createdAt": "2026-09-23T03:31:09.780Z"
+      },
+      {
+        "id": "7b4cb637-faad-4b38-9534-9d89ee5c623b",
+        "code": "FM-OPTICS-LAMP-DEGRADATION",
+        "title": "Photometric Lamp Output Drift",
+        "description": "Tungsten-halogen lamp emission decay at 340nm causing photometric calibration drift.",
+        "createdAt": "2026-09-23T03:31:09.781Z"
+      }
+    ],
+    "componentFailureModes": [
+      {
+        "id": "1f72d2fe-3ea5-4ad6-900e-a5357f99a3b2",
+        "componentId": "c3a65c8c-60c3-47fe-b44b-2c3474c60480",
+        "failureModeId": "7a2da322-36fa-46ae-ae9b-545e159c30dc",
+        "historicalProbability": 0.65
+      },
+      {
+        "id": "46dd4c0f-d93c-40ed-8866-3cb479c68f56",
+        "componentId": "285de86c-a884-4a08-837a-691e2c69b296",
+        "failureModeId": "7a2da322-36fa-46ae-ae9b-545e159c30dc",
+        "historicalProbability": 0.25
+      },
+      {
+        "id": "62ad07a6-5823-4e1a-8b18-75f4468c2575",
+        "componentId": "6633df96-efc5-4096-a417-ad5c2436358a",
+        "failureModeId": "7b4cb637-faad-4b38-9534-9d89ee5c623b",
+        "historicalProbability": 0.9
+      }
+    ]
+  },
+  "diagnosticKnowledge": {
+    "procedures": [
+      {
+        "id": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "title": "Pump Pressure Calibration & Leak Verification",
+        "description": "Comprehensive workflow to test hydraulic pressure stability, verify pump stroke volume, and bleed micro-bubbles from the manifold.",
+        "firmwareMin": "4.0.0",
+        "firmwareMax": "6.5.0",
+        "procedureType": "troubleshooting",
+        "createdAt": "2026-09-23T03:31:09.791Z",
+        "updatedAt": "2026-09-23T03:31:09.791Z"
+      }
+    ],
+    "diagnosticStepNodes": [
+      {
+        "id": "d8b3c5c1-5440-456a-82ad-1f600a9928a3",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_CALIBRATE_TRANSDUCER",
+        "nodeType": "APPROVAL_GATE",
+        "stepNumber": 7,
+        "title": "Pressure Sensor Zero Calibration Write",
+        "instruction": "Transducer zero-point offset requires software recalibration and writing new baseline offset to non-volatile EEPROM.",
+        "warning": "Consequential action: Overwrites factory calibration register on analog interface board.",
+        "requiredTool": null,
+        "measurementTarget": null,
+        "nominalMin": null,
+        "nominalMax": null,
+        "unit": null,
+        "passNextNodeKey": "STEP_FINAL_PURGE_VERIFY",
+        "failNextNodeKey": null,
+        "probableCauseOnFail": null,
+        "recommendedPart": null,
+        "requiresApproval": true,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "7f7ea948-04d5-4afa-bf11-f1c247c00fd2",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_FINAL_PURGE_VERIFY",
+        "nodeType": "ACTION",
+        "stepNumber": 8,
+        "title": "Final Deionized Water Purge & System Prime",
+        "instruction": "Run 10 prime cycles with deionized water. Ensure bubble detector BD-01 remains clear of microbubbles and manifold holds target pressure.",
+        "warning": null,
+        "requiredTool": null,
+        "measurementTarget": null,
+        "nominalMin": null,
+        "nominalMax": null,
+        "unit": null,
+        "passNextNodeKey": null,
+        "failNextNodeKey": null,
+        "probableCauseOnFail": null,
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "bb690d78-b25e-4097-954d-94a2e07aba1d",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_INSPECT_POWER_HARNESS",
+        "nodeType": "ACTION",
+        "stepNumber": 3,
+        "title": "Inspect Power Harness & Driver Fuse",
+        "instruction": "Check connector CN-FL-PWR for secure seating. Inspect 24V fuse F102 on Power Distribution Board. Reseat cable harness and re-verify voltage.",
+        "warning": null,
+        "requiredTool": null,
+        "measurementTarget": null,
+        "nominalMin": null,
+        "nominalMax": null,
+        "unit": null,
+        "passNextNodeKey": "STEP_PUMP_SUPPLY_VOLTAGE",
+        "failNextNodeKey": null,
+        "probableCauseOnFail": null,
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "57af0f01-2176-4fea-9450-e2ebff231451",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_INSPECT_PUMP_SEALS",
+        "nodeType": "APPROVAL_GATE",
+        "stepNumber": 5,
+        "title": "Pump Plunger Seal Inspection & Replacement",
+        "instruction": "Physical inspection confirms fluid weeping at Syringe Pump P-102 lower barrel. Human authorization required before consuming and replacing pump seal kit SP-948-230-01.",
+        "warning": "Consequential action: Consumes billable spare part and resets maintenance lifecycle timer.",
+        "requiredTool": null,
+        "measurementTarget": null,
+        "nominalMin": null,
+        "nominalMax": null,
+        "unit": null,
+        "passNextNodeKey": "STEP_PRESSURE_MANIFOLD_TEST",
+        "failNextNodeKey": null,
+        "probableCauseOnFail": null,
+        "recommendedPart": "SP-948-230-01",
+        "requiresApproval": true,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "082474a5-0bdd-4d4c-a736-ea010605a54f",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_PRESSURE_MANIFOLD_TEST",
+        "nodeType": "MEASUREMENT",
+        "stepNumber": 4,
+        "title": "Fluidics Manifold Working Pressure Test",
+        "instruction": "Connect digital manometer P/N 948-CAL-01 to test port TP-FL-01. Initiate 30-second prime sequence at 200 uL/s.",
+        "warning": "Ensure bleed valve BV-01 is sealed tight prior to running the pump.",
+        "requiredTool": "Digital Manometer P/N 948-CAL-01",
+        "measurementTarget": "Hydraulic Manifold Operating Pressure",
+        "nominalMin": 114,
+        "nominalMax": 126,
+        "unit": "kPa",
+        "passNextNodeKey": "STEP_VERIFY_SENSOR_ZERO",
+        "failNextNodeKey": "STEP_INSPECT_PUMP_SEALS",
+        "probableCauseOnFail": "Degraded syringe pump seals causing internal cavitation and pressure loss.",
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "c136a918-cfe1-4fa1-9256-fbce0876397a",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_PUMP_SUPPLY_VOLTAGE",
+        "nodeType": "MEASUREMENT",
+        "stepNumber": 2,
+        "title": "Verify Syringe Stepper Motor 24V DC Rail",
+        "instruction": "Using a calibrated digital multimeter, measure DC voltage between test pin TP-PWR-01 and GND on the motor driver board.",
+        "warning": null,
+        "requiredTool": "Digital Multimeter (Fluke 87V or equivalent)",
+        "measurementTarget": "DC Bus Voltage (TP-PWR-01)",
+        "nominalMin": 23.5,
+        "nominalMax": 24.5,
+        "unit": "VDC",
+        "passNextNodeKey": "STEP_PRESSURE_MANIFOLD_TEST",
+        "failNextNodeKey": "STEP_INSPECT_POWER_HARNESS",
+        "probableCauseOnFail": "Auxiliary 24V power supply rail drop or blown fuse F102 on PDB.",
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "2819de08-7652-4f17-ad43-ea7186102393",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_SAFETY_ISOLATE",
+        "nodeType": "SAFETY_CHECK",
+        "stepNumber": 1,
+        "title": "Depressurize Fluidics & Safety Isolation",
+        "instruction": "Verify instrument status is in Service Mode. Position a dedicated 500mL biohazard waste collector beneath drain line W-02 before opening fluidics compartment door.",
+        "warning": "Biohazard risk: Wear nitrile gloves and safety eye protection when handling waste tubing.",
+        "requiredTool": "Biohazard Collector Container 500mL",
+        "measurementTarget": null,
+        "nominalMin": null,
+        "nominalMax": null,
+        "unit": null,
+        "passNextNodeKey": "STEP_PUMP_SUPPLY_VOLTAGE",
+        "failNextNodeKey": null,
+        "probableCauseOnFail": null,
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      },
+      {
+        "id": "01b7c8a3-d1b2-45e0-a6f1-a1404651ff55",
+        "procedureId": "51350e9e-73cf-4096-ab56-ba5f97fad204",
+        "nodeKey": "STEP_VERIFY_SENSOR_ZERO",
+        "nodeType": "MEASUREMENT",
+        "stepNumber": 6,
+        "title": "Transducer Zero-Point Verification",
+        "instruction": "Open atmospheric vent valve V-03. Verify pressure transducer PS-23 reads baseline 0.0 kPa within sensor tolerance.",
+        "warning": null,
+        "requiredTool": null,
+        "measurementTarget": "Sensor Atmospheric Baseline Zero",
+        "nominalMin": -1,
+        "nominalMax": 1.5,
+        "unit": "kPa",
+        "passNextNodeKey": "STEP_FINAL_PURGE_VERIFY",
+        "failNextNodeKey": "STEP_CALIBRATE_TRANSDUCER",
+        "probableCauseOnFail": "Transducer DC offset drift accumulated over operational hours.",
+        "recommendedPart": null,
+        "requiresApproval": false,
+        "createdAt": "2026-09-23T03:31:09.804Z"
+      }
+    ],
+    "errorCodes": [
+      {
+        "id": "bbb0ec29-7ccb-4e63-b22d-51882de5a2bc",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "code": "E1045",
+        "description": "Pressure instability detected in fluidics system during aspiration cycle.",
+        "createdAt": "2026-09-23T03:31:09.787Z",
+        "updatedAt": "2026-09-23T03:31:09.787Z"
+      },
+      {
+        "id": "a040d486-aab4-46b7-8141-e62e34c40d15",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "code": "E1201",
+        "description": "Optical baseline absorbance at 340nm exceeds acceptable noise floor.",
+        "createdAt": "2026-09-23T03:31:09.788Z",
+        "updatedAt": "2026-09-23T03:31:09.788Z"
+      }
+    ],
+    "symptoms": [
+      {
+        "id": "75800985-bf92-4ba9-ba6a-aa7642b56a52",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "description": "Irregular dispensing volume, pressure error during startup, or fluid leakage near manifold.",
+        "createdAt": "2026-09-23T03:31:09.789Z",
+        "updatedAt": "2026-09-23T03:31:09.789Z"
+      },
+      {
+        "id": "b70e194a-22e2-4a78-98b9-371ba94b3b3e",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "description": "Photometric calibration failure on reagent blank at 340nm.",
+        "createdAt": "2026-09-23T03:31:09.791Z",
+        "updatedAt": "2026-09-23T03:31:09.791Z"
+      }
+    ],
+    "serviceBulletins": [
+      {
+        "id": "d2f6d15e-7e7f-44db-ad49-9e29ece766bf",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "bulletinCode": "SB-2026-014",
+        "title": "Updated Fluidics Pressure Calibration Standards for Firmware 4.2+",
+        "description": "Defines updated acceptable manifold pressure limits (114-126 kPa) and mandates checking Syringe Pump P-102 plunger seal for batch 2024-Q3.",
+        "releaseDate": "2026-02-15T00:00:00.000Z",
+        "createdAt": "2026-09-23T03:31:09.798Z",
+        "updatedAt": "2026-09-23T03:31:09.798Z"
+      }
+    ],
+    "knowledgeEdges": [
+      {
+        "id": "3126eb63-2816-4a6a-bac4-07a7c7a376e2",
+        "sourceId": "COMP-LAMP-L01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-OPTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "e1debe7d-a85b-48e9-b651-174c61ef04ff",
+        "sourceId": "COMP-LAMP-L01",
+        "sourceType": "COMPONENT",
+        "targetId": "COMP-PHOTOMETER-PH01",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "26f05fcd-7868-493b-b54b-298bdfd9bcb9",
+        "sourceId": "COMP-LAMP-L01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-POWER",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0786ac15-5a32-4b3e-bdfe-e4d152e31fbb",
+        "sourceId": "COMP-THERMAL-H01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-THERMAL",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "aca08f81-5378-44b0-9d12-d1f73932b948",
+        "sourceId": "COMP-THERMAL-C01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-THERMAL",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "e4ec240f-8ad1-4d0c-bfa2-f7f35d931858",
+        "sourceId": "COMP-PHOTOMETER-PH01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-OPTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "1321551f-5a63-48c5-8746-9ca91fa22a36",
+        "sourceId": "COMP-PHOTOMETER-PH01",
+        "sourceType": "COMPONENT",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3ec06a45-2b13-4784-86b2-8954de64ea0c",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7311aa04-ec75-42ee-bf8f-8cacdb032dda",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "SP-948-510-23",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "33940960-8ced-4cd4-b702-797f772ca0ff",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7c34426d-247e-405c-a56b-7539f7ff40c5",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "2ff5e634-c572-4881-8c75-c2d7137a695f",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0dabedd5-09b3-4f49-a45b-720238d72b7b",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "467f484b-3ea1-4ad9-9612-a4390febeadc",
+        "sourceId": "COMP-SENSOR-PS23",
+        "sourceType": "COMPONENT",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0350cef0-668c-41b5-a941-98de39d7154c",
+        "sourceId": "COMP-PUMP-P102",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "eb06044e-901c-4915-8269-247b42904842",
+        "sourceId": "COMP-PUMP-P102",
+        "sourceType": "COMPONENT",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3cc547d7-4f53-400e-8905-95889084c753",
+        "sourceId": "COMP-PUMP-P102",
+        "sourceType": "COMPONENT",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "e4a7b82b-162d-45ae-9228-39e4e9eb833c",
+        "sourceId": "COMP-PUMP-P102",
+        "sourceType": "COMPONENT",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7f132d83-c867-4c1b-8cc3-f20bbe962edc",
+        "sourceId": "COMP-PUMP-P102",
+        "sourceType": "COMPONENT",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "768f5a7c-3dfc-415c-8b69-7660d4aa565e",
+        "sourceId": "COMP-ROBOTICS-R02",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-ROBOTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "b12af113-e0c9-4c90-9fc2-aa26e3b9b8b7",
+        "sourceId": "COMP-ROBOTICS-R01",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-ROBOTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "632b3c0a-69f4-4dc2-a8e3-ac46e0016f76",
+        "sourceId": "COMP-VALVE-V04",
+        "sourceType": "COMPONENT",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3fa6bebf-ae44-42be-8cf5-2f0a70047c55",
+        "sourceId": "COMP-VALVE-V04",
+        "sourceType": "COMPONENT",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "69865171-001a-4782-92f6-32b843029bcb",
+        "sourceId": "COMP-VALVE-V04",
+        "sourceType": "COMPONENT",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3bb8e302-07b7-4df7-b513-fa724fc9615a",
+        "sourceId": "COMP-VALVE-V04",
+        "sourceType": "COMPONENT",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "FAILS_WITH",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "ecc3684f-b8f2-4795-bf9d-cc1d384767a1",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "8b460093-40d0-4a06-8eaf-9a98dd0efbeb",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "808f896a-c538-4163-86da-487af851fe56",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3647cb18-4c55-405d-8885-470a0252bc25",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6f312ee0-649a-4489-8103-5e4d072dbc16",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "78353dda-8498-4edc-9c6e-d82cb476c7d1",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "369a60ea-5b45-4a9c-a59f-670adb79693c",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "221a73be-4d15-45bb-b1d3-3fbe2cfcd5f8",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "cb7ccd14-d63c-4d58-840a-969b18e19de3",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "RESOLVES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a58daca1-7dcc-4ab2-ba78-35f5218e6a0e",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "d47ce9a5-77e2-4d86-a23e-e8aaceb08c2d",
+        "sourceId": "ERR-E1045",
+        "sourceType": "ERROR_CODE",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "df22d8b5-77c9-48d2-a186-51f94e1d271c",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "13759774-e28f-4228-9329-55885a1927f3",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "eac3e425-cf9a-430a-8cbe-4dbe830c9ed4",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "5cb605c5-2d28-4ecd-a68b-6fc58c056064",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "157e95c0-c013-4062-97c6-302ef348d92e",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-VALVE-V04",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "450fb896-0b2a-4ac4-a9dd-94267a0ad978",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "SYM-PRESSURE-ERRATIC",
+        "targetType": "SYMPTOM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a650a26f-d352-41da-bcd6-3c9e86b26b77",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "INDICATES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f45fc9ea-b711-4b59-8738-d9063e602803",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a2055731-12da-4b01-b485-4cee0be1837e",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "229018b2-5e7b-4c53-ba55-d6002ed18edb",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "SP-948-510-23",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "301aac0d-ba9e-48d6-ac7c-fa45935defa4",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a18f47ff-44c1-4e67-a804-883c405d2079",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-VALVE-V04",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "2944658a-4caa-4f0a-85c4-e22702f0d71b",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a4a9dc2b-91fa-4ff9-9cd6-c6f58a4d5c7d",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "b000ebf3-9fd5-4ece-b0fb-9be78c1c6b5d",
+        "sourceId": "FM-FLUIDICS-PRESSURE-DROP",
+        "sourceType": "FAILURE_MODE",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6301d5af-2919-4811-bd58-9498b9fe2272",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "41f0d304-6d4e-4855-806d-8fef9a83a1e5",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-OPTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "134a4d2b-7444-4495-a000-02c9be0792ee",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-ROBOTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "ac41838c-d97f-4a59-ae4e-281a197b8896",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-THERMAL",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "18b87007-03ea-48e5-a658-56d87a736ba3",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-POWER",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "412fca60-3500-4c95-a954-953574a346ba",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-CONSUMABLES",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "c21dee74-6bd7-4790-84cd-f4d9aac25685",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SAFE-BIOHAZARD",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "68339100-07c4-47c0-a3db-1a80bf6075a5",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SAFE-LOTO",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a7e8b503-95a2-4baa-b4bb-f6bf002d8d0d",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9e242269-6512-4839-a086-7e4cd86a7099",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-OPTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "44139607-b656-4854-b8b4-262ded04dcbc",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-ROBOTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "cf57a1d0-b42d-4610-8d86-e52c884422c0",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-THERMAL",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "d46c15ef-dd48-4037-a5c7-580752caf588",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-POWER",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9b08209d-f31a-4689-a44e-2770e42558ad",
+        "sourceId": "INST-ANALYZER-X200",
+        "sourceType": "INSTRUMENT",
+        "targetId": "SUB-CONSUMABLES",
+        "targetType": "SUBSYSTEM",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "8b650af0-78dd-41e8-a9d1-79effba48bae",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "1f7e2c56-857a-4fa8-b364-77cf3a304ad7",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "53abe5cb-2217-463f-8585-3a33e6f46c65",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "224022fa-6ae4-47b1-8b5a-d69f7d6e839b",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "1543f294-e63a-4cd1-8b24-1678858472a7",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "c1141ab6-f27d-45e7-9415-b9ff5b5c745b",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f6eae402-a91a-4612-b873-5c1b25773fe1",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "35447e50-a063-4757-8981-b5370859c58a",
+        "sourceId": "SP-948-230-01",
+        "sourceType": "SPARE_PART",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6c13d6fc-20d0-4d43-aba4-f84dd9770e19",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "2ef23f52-3060-4434-bfc2-28395ad84dac",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "fac9fce7-2e6e-44c1-8d29-2ed14c98c2a4",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "89f752cf-f767-4a3b-a4f1-399fa658b2f4",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "bab7f000-afe6-4a33-b8ab-03551a7ae898",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "30390926-f218-422d-963d-7a0e82a90fed",
+        "sourceId": "SP-948-510-23",
+        "sourceType": "SPARE_PART",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a0089a48-4015-4e1a-be67-5a955766f10d",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "96321617-4501-4d9f-bfba-662964f69432",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4b91af7d-7f54-4e20-8dc7-09e60f332213",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6111ef31-85e9-4204-9ecd-6e337bdf2644",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SP-948-510-23",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "927bb212-514c-42e7-9858-f83d6e666c69",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SAFE-BIOHAZARD",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9c61219a-2018-402e-8776-b5b9eefe03bc",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SAFE-LOTO",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "20be2a44-9b9e-461f-a7a2-17dd45d5be43",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "82dd7091-1ab8-4db2-8bc1-d79abaae9d91",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "INDICATES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "5ddd3d31-d435-40c4-b145-5ba12bd96aed",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "e89b8276-ca27-4740-b1cb-100fc2f84c5b",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9811d413-9709-4927-b8ae-8291d3558e19",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7f09cd6e-ad80-4c3e-86b4-15d34f2e0e4b",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SAFE-BIOHAZARD",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "26d603d1-f71b-4471-99f5-737354c2665b",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "980a66b8-7c6e-4326-ada5-1497fc1bae72",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "COMP-VALVE-V04",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "100f0528-5f8f-458d-8f3b-6c9c7d36d55e",
+        "sourceId": "PROC-PUMP-CALIBRATION",
+        "sourceType": "PROCEDURE",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "437ed871-b0a2-400b-b3a4-732a99cabbd3",
+        "sourceId": "SAFE-BIOHAZARD",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0489ec07-1049-40c5-919d-7909849fb26b",
+        "sourceId": "SAFE-BIOHAZARD",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "b6311368-05aa-4955-9a3f-bafeeba2b0f8",
+        "sourceId": "SAFE-BIOHAZARD",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "62295f56-f4b2-4392-a76c-857c7d57436b",
+        "sourceId": "SAFE-BIOHAZARD",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4c9922b2-1e61-4b1d-b8a6-af8f9ea6936a",
+        "sourceId": "SAFE-LOTO",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4541c1e4-aaaf-428f-897f-c1e56305a370",
+        "sourceId": "SAFE-LOTO",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "SUB-POWER",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4b64557a-2cbc-42c2-9e57-1307892302db",
+        "sourceId": "SAFE-LOTO",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "SUB-ROBOTICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6fb346b0-1a9a-412b-817f-8b8b226df471",
+        "sourceId": "SAFE-LOTO",
+        "sourceType": "SAFETY_PROTOCOL",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "51f599a4-85b1-4620-9408-b047e1a7a6e9",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "89aab146-4f8c-4be8-b10d-bd2ed6403c5b",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "dd958054-772f-42c1-8227-f0baef3da4f9",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "af9b6eb1-c7d1-4500-b174-61fd083f6c24",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "153152a7-66dc-4e7b-9b6c-6df038a3ed12",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7b22d0c2-0a38-4426-9442-39f153872fce",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "286385d8-5c01-42ed-b376-a5bc98d37f7a",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "SP-948-510-23",
+        "targetType": "SPARE_PART",
+        "relationship": "USES_PART",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4efc91f6-5956-4567-8abe-387779609025",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "5d2f489e-350b-4126-9adb-f09cab55e655",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "94210524-e6e9-4e26-a166-18da2add5656",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "3cb39eba-402a-49a4-942b-54dd599393d6",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9233e3a7-018d-41d5-9786-968b9c522ec6",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "SP-948-230-01",
+        "targetType": "SPARE_PART",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "486ff65b-a924-4cdb-8f38-38b113cd76b5",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "569f1c9e-1b6d-4627-9403-8727781073c4",
+        "sourceId": "SB-2026-014",
+        "sourceType": "SERVICE_BULLETIN",
+        "targetId": "SP-948-510-23",
+        "targetType": "SPARE_PART",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4deee88c-d43f-42cc-a376-c0821d8912a3",
+        "sourceId": "SUB-CONSUMABLES",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "554f0a2b-51a4-44c4-9a15-e5a9acf4a91f",
+        "sourceId": "SUB-CONSUMABLES",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "SAFE-BIOHAZARD",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "b724dbc9-11ff-4885-8914-ff8efed0fb0e",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f1a40714-b241-4423-a286-bd3f7c1d6fb5",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6d3acb4f-ef76-4924-81c7-8b6e5584e1d2",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "49ff8d73-6378-46fc-a498-d1b4ab9c56b7",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-VALVE-V04",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0d07b53b-b97f-4fbc-87fc-68538a4343ed",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f8a27b54-a32e-4e54-ad99-bad414ab4b45",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "741d61cd-ae56-4a84-9858-a3a5adff09d9",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "SB-2026-014",
+        "targetType": "SERVICE_BULLETIN",
+        "relationship": "GOVERNED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "35c56f83-ce38-41ec-9121-df769f7a42a5",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f25fc051-4fa6-487b-982a-ed6932499a84",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7acb8c70-3f7d-48f0-b71f-22b7c4374052",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "005b2b27-c135-4f32-a342-b07974917d67",
+        "sourceId": "SUB-FLUIDICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-VALVE-V04",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "84c197b6-23d3-4493-96d7-be2685af2a27",
+        "sourceId": "SUB-OPTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "21f305c4-010f-49fe-a509-1c65b5a474a8",
+        "sourceId": "SUB-OPTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-PHOTOMETER-PH01",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "1bcaf75e-0b8e-41ac-bd56-b92cf0dd5023",
+        "sourceId": "SUB-OPTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-LAMP-L01",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4a3d7a52-1aa4-4289-b266-f9e5a0d7f307",
+        "sourceId": "SUB-POWER",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "bacdfca6-173c-4e3e-999a-5fbd20fe9ecd",
+        "sourceId": "SUB-POWER",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "SAFE-LOTO",
+        "targetType": "SAFETY_PROTOCOL",
+        "relationship": "REQUIRES_SAFETY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "bbb10436-41e5-465f-af62-332a3c88df9f",
+        "sourceId": "SUB-ROBOTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "caa7f9e4-6d57-4b1e-85d7-ce5371c48ccd",
+        "sourceId": "SUB-ROBOTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-ROBOTICS-R01",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "b7a9396d-2d1c-4a6e-bbcf-5fd2f7a62091",
+        "sourceId": "SUB-ROBOTICS",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-ROBOTICS-R02",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "9815e9ad-cfba-424a-849d-315e8f113b40",
+        "sourceId": "SUB-THERMAL",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "07d2280e-3856-491b-b2f7-d0290c46dc03",
+        "sourceId": "SUB-THERMAL",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-THERMAL-H01",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "4fd71e43-2cd0-403f-b53e-dfd63cc7f486",
+        "sourceId": "SUB-THERMAL",
+        "sourceType": "SUBSYSTEM",
+        "targetId": "COMP-THERMAL-C01",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "6c443721-621c-4e3a-aca5-f4f241446088",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "INST-ANALYZER-X200",
+        "targetType": "INSTRUMENT",
+        "relationship": "PART_OF",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "fe18a970-6375-4935-867d-7cbfc37f29ba",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "SUB-FLUIDICS",
+        "targetType": "SUBSYSTEM",
+        "relationship": "BELONGS_TO",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "82c6d81f-777e-4a15-808d-946e853d9491",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "INDICATES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "0d16775e-fb39-498d-86b0-be356ab32af2",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f1f63efa-4366-4cce-a9cd-4fe6e160fdf4",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "AFFECTS",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "f5a92197-ac40-4a91-989b-7d4a9af2da00",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "FM-FLUIDICS-PRESSURE-DROP",
+        "targetType": "FAILURE_MODE",
+        "relationship": "CAUSED_BY",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "7e4669ea-ba2a-449c-b016-3bc6d00435bb",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "PROCEDURE_FOR",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "172dd216-ee3d-4690-a267-3e4c091048b6",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "ERR-E1045",
+        "targetType": "ERROR_CODE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "a04db71b-31f2-4bd7-9203-157ed74b35ab",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "COMP-PUMP-P102",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "67d65d06-443d-458d-b048-35f38ca564c6",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "COMP-SENSOR-PS23",
+        "targetType": "COMPONENT",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      },
+      {
+        "id": "28830178-9d14-4e3d-aa3f-3da9f61adecd",
+        "sourceId": "SYM-PRESSURE-ERRATIC",
+        "sourceType": "SYMPTOM",
+        "targetId": "PROC-PUMP-CALIBRATION",
+        "targetType": "PROCEDURE",
+        "relationship": "REFERENCES",
+        "weight": 1,
+        "createdAt": "2026-09-23T03:31:32.114Z"
+      }
+    ]
+  },
+  "documentation": {
+    "documents": [
+      {
+        "id": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "title": "Analyzer_X200_Service_Manual.pdf",
+        "instrumentId": "a2d7b449-814f-47a7-9b0c-306430830ca8",
+        "documentType": "service_manual",
+        "filePath": "C:\\Users\\PCama\\Documents\\Portfolio\\ivA-Troubleshooter\\documents\\instruments\\Analyzer_X200\\Analyzer_X200_Service_Manual.pdf",
+        "uploadedAt": "2026-09-23T00:47:16.274Z"
+      }
+    ],
+    "pages": [
+      {
+        "id": "9096842b-c5e7-40b4-b438-faa8d56657d8",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "pageNumber": 1,
+        "width": 612,
+        "height": 792,
+        "rawText": "The BioMed Analyzer X200 is a fully automated, random-access clinical chemistry analyzer capable of executing up to 800 photometric tests per hour. Analytical precision relies on synchronous closed-loop coordination between the Fluidics Aspiration/Dispense manifold, the 12-wavelength diffraction grating photometer, and dual robotic pipetting arms with capacitive liquid level detection.\n\nThis technical manual provides authorized Field Service Engineers (FSE) with factory diagnostic thresholds, calibration procedures, alarm code resolution trees, and safety compliance directives.\n\nBIOHAZARD & HIGH VOLTAGE MANDATORY WARNING: All patient sera and fluidic waste lines must be treated as potentially infectious. Wear PPE (gloves, eye protection). Mains AC line voltages (100-240V) exist within the rear power distribution bay. Adhere strictly to LOTO protocols.",
+        "thumbnailUrl": null,
+        "createdAt": "2026-09-23T03:44:15.745Z"
+      },
+      {
+        "id": "637e60c6-957e-4496-a6ae-ec3aea9224d5",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "pageNumber": 2,
+        "width": 612,
+        "height": 792,
+        "rawText": "Hydraulic Operating Parameter Limits:\n\n| Operating Parameter | Nominal Target | Min Allowable | Max Allowable | Unit |\n| --- | --- | --- | --- | --- |\n| Manifold Baseline Pressure | 120.0 | 114.0 | 126.0 | kPa |\n| Degasser Vacuum Level | -80.0 | -85.0 | -75.0 | kPa |\n| Dispense Syringe Stroke | 250.0 | 249.5 | 250.5 | uL |\n| De-bubble Purge Velocity | 50.0 | 45.0 | 55.0 | uL/s |\n| Sensor Zero Offset Limit | 0.0 | -1.2 | +1.2 | kPa |\n\n• Syringe Dispense Pump P-102 (P/N 948-230-01): 250 uL ceramic piston displacement mechanism.\n• Manifold Pressure Transducer PS-23 (P/N 948-510-23): Piezo-resistive stainless sensor on central block.\n• Solenoid Pinch Valve V-04 (P/N 948-310-04): 3-way high-velocity PTFE isolate valve.\n• Replacement Plunger Seal Upgrade Kit (P/N SP-948-230-01): Mandated by Service Bulletin SB-2026-014.",
+        "thumbnailUrl": null,
+        "createdAt": "2026-09-23T03:44:15.753Z"
+      },
+      {
+        "id": "2fbd6db0-1c1e-41ca-91c4-7ebcd4f9d8a9",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "pageNumber": 3,
+        "width": 612,
+        "height": 792,
+        "rawText": "STEP 1: Line Depressurization & Safety Verification\nOpen Service Utilities > Fluidics Diagnostics > Depressurize Manifold. Verify digital readout drops to 0.0 kPa.\n\nSTEP 2: Physical Pressure Transducer Calibration Check\nConnect NIST-traceable Digital Manometer 948-CAL-01 to Quick-Disconnect test port TP-FL-01 on the central manifold.\nExecute 3-minute continuous DI water prime sequence at 50 uL/s.\n\nDECISION BRANCH A: Physical Manometer vs Telemetry Divergence\n• If physical manometer reads within 114.0 - 126.0 kPa, but software telemetry reports < 114.0 kPa:\n  Cause: Transducer drift or zero-offset error in Pressure Sensor PS-23 (P/N 948-510-23).\n  Corrective Action: Recalibrate zero offset via PROC-PUMP-CALIBRATION. If offset exceeds +/- 1.2 kPa, replace sensor with assembly SP-948-510-23.\n\nDECISION BRANCH B: True Physical Pressure Decay\n• If physical manometer ALSO reads < 114.0 kPa or exhibits decay > 1.5 kPa over 60 seconds:\n  Cause: Mechanical seal bypass in Syringe Pump P-102 or internal micro-tearing in Solenoid Valve V-04.\n  Corrective Action: Replace P-102 ceramic plunger wash seals using Upgraded Kit SP-948-230-01. Refer to Service Bulletin SB-2026-014 for proper torque specifications (1.2 Nm).",
+        "thumbnailUrl": null,
+        "createdAt": "2026-09-23T03:44:15.757Z"
+      },
+      {
+        "id": "5c9bfaea-bcc4-495d-bea3-3290086587f5",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "pageNumber": 4,
+        "width": 612,
+        "height": 792,
+        "rawText": "FMEA Matrix & Service Bulletin Compliance:\n\n| Failure Mode Code | Severity | Occur | Detect | RPN | Mandatory Action Protocol |\n| --- | --- | --- | --- | --- | --- |\n| FM-FLUIDICS-PRESSURE-DROP | 7 | 4 | 2 | 56 | Install Seal Kit SP-948-230-01 |\n| FM-SENSOR-ZERO-DRIFT | 6 | 3 | 2 | 36 | Zero calibration via PROC-PUMP-CALIBRATION |\n| FM-VALVE-SEAT-LEAK | 6 | 2 | 3 | 36 | Flush lines with bleach; replace V-04 |\n| FM-OPTICS-LAMP-DEGRADATION | 5 | 3 | 1 | 15 | Replace lamp L-01 every 2000 hours |\n\nAll field interventions performed under Service Bulletin SB-2026-014 must be validated with digital NIST manometer records logged directly into the Field Service Platform before clearing machine status to OPERATIONAL.",
+        "thumbnailUrl": null,
+        "createdAt": "2026-09-23T03:44:15.832Z"
+      }
+    ],
+    "chunks": [
+      {
+        "id": "8cc5b998-35e4-4b40-a357-341e76bd4ba5",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "The BioMed Analyzer X200 is a fully automated, random-access clinical chemistry analyzer capable of executing up to 800 photometric tests per hour. Analytical precision relies on synchronous closed-loop coordination between the Fluidics Aspiration/Dispense manifold, the 12-wavelength diffraction grating photometer, and dual robotic pipetting arms with capacitive liquid level detection.\n\nThis technical manual provides authorized Field Service Engineers (FSE) with factory diagnostic thresholds, calibration procedures, alarm code resolution trees, and safety compliance directives.",
+        "pageNumber": 1,
+        "sectionTitle": "1. System Description & Analytical Architecture",
+        "boundingBox": {
+          "x": 40,
+          "y": 512,
+          "width": 532,
+          "height": 100,
+          "normTop": 22.7,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 12.6
+        },
+        "chunkType": "TEXT",
+        "tokenCount": 95,
+        "createdAt": "2026-09-23T03:44:15.961Z"
+      },
+      {
+        "id": "957c17bc-8df3-4c41-b247-fbe0850af582",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "BIOHAZARD & HIGH VOLTAGE MANDATORY WARNING: All patient sera and fluidic waste lines must be treated as potentially infectious. Wear PPE (gloves, eye protection). Mains AC line voltages (100-240V) exist within the rear power distribution bay. Adhere strictly to LOTO protocols.",
+        "pageNumber": 1,
+        "sectionTitle": "Safety Directives",
+        "boundingBox": {
+          "x": 40,
+          "y": 422,
+          "width": 532,
+          "height": 65,
+          "normTop": 38.5,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 8.2
+        },
+        "chunkType": "WARNING",
+        "tokenCount": 52,
+        "createdAt": "2026-09-23T03:44:15.974Z"
+      },
+      {
+        "id": "08e5c160-e1e3-47c2-9928-485bc61789cc",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "Hydraulic Operating Parameter Limits:\n\n| Operating Parameter | Nominal Target | Min Allowable | Max Allowable | Unit |\n| --- | --- | --- | --- | --- |\n| Manifold Baseline Pressure | 120.0 | 114.0 | 126.0 | kPa |\n| Degasser Vacuum Level | -80.0 | -85.0 | -75.0 | kPa |\n| Dispense Syringe Stroke | 250.0 | 249.5 | 250.5 | uL |\n| De-bubble Purge Velocity | 50.0 | 45.0 | 55.0 | uL/s |\n| Sensor Zero Offset Limit | 0.0 | -1.2 | +1.2 | kPa |",
+        "pageNumber": 2,
+        "sectionTitle": "2.1 Hydraulic Operating Parameter Limits",
+        "boundingBox": {
+          "x": 40,
+          "y": 532,
+          "width": 532,
+          "height": 140,
+          "normTop": 15.2,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 17.7
+        },
+        "chunkType": "TABLE",
+        "tokenCount": 88,
+        "createdAt": "2026-09-23T03:44:15.980Z"
+      },
+      {
+        "id": "ccf870a7-2c70-4d67-a190-dd82a4a15120",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "• Syringe Dispense Pump P-102 (P/N 948-230-01): 250 uL ceramic piston displacement mechanism.\n• Manifold Pressure Transducer PS-23 (P/N 948-510-23): Piezo-resistive stainless sensor on central block.\n• Solenoid Pinch Valve V-04 (P/N 948-310-04): 3-way high-velocity PTFE isolate valve.\n• Replacement Plunger Seal Upgrade Kit (P/N SP-948-230-01): Mandated by Service Bulletin SB-2026-014.",
+        "pageNumber": 2,
+        "sectionTitle": "2.2 Critical Fluidic Components & Part Numbers",
+        "boundingBox": {
+          "x": 40,
+          "y": 412,
+          "width": 532,
+          "height": 85,
+          "normTop": 37.2,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 10.7
+        },
+        "chunkType": "SPECIFICATION",
+        "tokenCount": 74,
+        "createdAt": "2026-09-23T03:44:15.984Z"
+      },
+      {
+        "id": "27e5b061-2e67-47bf-9f62-0bdfe5242e7a",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "STEP 1: Line Depressurization & Safety Verification\nOpen Service Utilities > Fluidics Diagnostics > Depressurize Manifold. Verify digital readout drops to 0.0 kPa.\n\nSTEP 2: Physical Pressure Transducer Calibration Check\nConnect NIST-traceable Digital Manometer 948-CAL-01 to Quick-Disconnect test port TP-FL-01 on the central manifold.\nExecute 3-minute continuous DI water prime sequence at 50 uL/s.",
+        "pageNumber": 3,
+        "sectionTitle": "3. Diagnostic Tree: Alarm Code E1045 - Setup",
+        "boundingBox": {
+          "x": 40,
+          "y": 552,
+          "width": 532,
+          "height": 110,
+          "normTop": 16.4,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 13.9
+        },
+        "chunkType": "PROCEDURE_STEP",
+        "tokenCount": 78,
+        "createdAt": "2026-09-23T03:44:15.988Z"
+      },
+      {
+        "id": "bbe3b8f6-b2ed-442b-89a6-5fd9c02adb92",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "DECISION BRANCH A: Physical Manometer vs Telemetry Divergence\n• If physical manometer reads within 114.0 - 126.0 kPa, but software telemetry reports < 114.0 kPa:\n  Cause: Transducer drift or zero-offset error in Pressure Sensor PS-23 (P/N 948-510-23).\n  Corrective Action: Recalibrate zero offset via PROC-PUMP-CALIBRATION. If offset exceeds +/- 1.2 kPa, replace sensor with assembly SP-948-510-23.",
+        "pageNumber": 3,
+        "sectionTitle": "3. Diagnostic Tree: Alarm Code E1045 - Branch A (Sensor Drift)",
+        "boundingBox": {
+          "x": 40,
+          "y": 427,
+          "width": 532,
+          "height": 95,
+          "normTop": 34.1,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 12
+        },
+        "chunkType": "PROCEDURE_STEP",
+        "tokenCount": 82,
+        "createdAt": "2026-09-23T03:44:15.994Z"
+      },
+      {
+        "id": "03725540-0a68-4eec-8333-b946ba78573b",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "DECISION BRANCH B: True Physical Pressure Decay\n• If physical manometer ALSO reads < 114.0 kPa or exhibits decay > 1.5 kPa over 60 seconds:\n  Cause: Mechanical seal bypass in Syringe Pump P-102 or internal micro-tearing in Solenoid Valve V-04.\n  Corrective Action: Replace P-102 ceramic plunger wash seals using Upgraded Kit SP-948-230-01. Refer to Service Bulletin SB-2026-014 for proper torque specifications (1.2 Nm).",
+        "pageNumber": 3,
+        "sectionTitle": "3. Diagnostic Tree: Alarm Code E1045 - Branch B (Mechanical Bypass)",
+        "boundingBox": {
+          "x": 40,
+          "y": 307,
+          "width": 532,
+          "height": 95,
+          "normTop": 49.2,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 12
+        },
+        "chunkType": "PROCEDURE_STEP",
+        "tokenCount": 86,
+        "createdAt": "2026-09-23T03:44:15.999Z"
+      },
+      {
+        "id": "b9b403c5-e200-4b83-9510-b052ee4cf6e7",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "FMEA Matrix & Service Bulletin Compliance:\n\n| Failure Mode Code | Severity | Occur | Detect | RPN | Mandatory Action Protocol |\n| --- | --- | --- | --- | --- | --- |\n| FM-FLUIDICS-PRESSURE-DROP | 7 | 4 | 2 | 56 | Install Seal Kit SP-948-230-01 |\n| FM-SENSOR-ZERO-DRIFT | 6 | 3 | 2 | 36 | Zero calibration via PROC-PUMP-CALIBRATION |\n| FM-VALVE-SEAT-LEAK | 6 | 2 | 3 | 36 | Flush lines with bleach; replace V-04 |\n| FM-OPTICS-LAMP-DEGRADATION | 5 | 3 | 1 | 15 | Replace lamp L-01 every 2000 hours |",
+        "pageNumber": 4,
+        "sectionTitle": "4. Service Bulletin SB-2026-014 Compliance & FMEA",
+        "boundingBox": {
+          "x": 40,
+          "y": 522,
+          "width": 532,
+          "height": 130,
+          "normTop": 17.7,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 16.4
+        },
+        "chunkType": "TABLE",
+        "tokenCount": 92,
+        "createdAt": "2026-09-23T03:44:16.002Z"
+      },
+      {
+        "id": "cb0c3100-a173-4339-a323-8ae35e2e6ab1",
+        "documentId": "4d26fd7d-d00a-4c6c-b396-301eb16d9f3c",
+        "chunkText": "All field interventions performed under Service Bulletin SB-2026-014 must be validated with digital NIST manometer records logged directly into the Field Service Platform before clearing machine status to OPERATIONAL.",
+        "pageNumber": 4,
+        "sectionTitle": "Quality Assurance & Field Authorization Sign-Off",
+        "boundingBox": {
+          "x": 40,
+          "y": 427,
+          "width": 532,
+          "height": 60,
+          "normTop": 38.5,
+          "normLeft": 6.5,
+          "normWidth": 86.9,
+          "normHeight": 7.6
+        },
+        "chunkType": "TEXT",
+        "tokenCount": 42,
+        "createdAt": "2026-09-23T03:44:16.005Z"
+      }
+    ],
+    "binaryFiles": {
+      "Analyzer_X200_Service_Manual.pdf": "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"
+    }
+  }
+}
