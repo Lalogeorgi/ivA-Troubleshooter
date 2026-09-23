@@ -44,18 +44,30 @@ export class KnowledgeSearchService {
       // pgvector requires the array formatted as '[1,2,3]' string explicitly.
       const vectorString = `[${queryVector.join(',')}]`;
 
-      const results = await this.prisma.$queryRawUnsafe<any[]>(`
-        SELECT 
-          d.title as "document_title", 
-          d.document_type as "document_type",
-          dc.chunk_text as "chunk_text", 
-          1 - (dc.embedding_vector <=> CAST($1 AS vector)) as "similarity_score"
-        FROM "DocumentChunk" dc
-        JOIN "Document" d ON d.id = dc.document_id
-        ${instrumentId ? `WHERE d.instrument_id = '${instrumentId}' OR d.instrument_id IS NULL` : ''}
-        ORDER BY dc.embedding_vector <=> CAST($1 AS vector)
-        LIMIT 5;
-      `, vectorString);
+      const results = instrumentId
+        ? await this.prisma.$queryRaw<any[]>`
+            SELECT 
+              d.title as "document_title", 
+              d.document_type as "document_type",
+              dc.chunk_text as "chunk_text", 
+              1 - (dc.embedding_vector <=> CAST(${vectorString} AS vector)) as "similarity_score"
+            FROM "DocumentChunk" dc
+            JOIN "Document" d ON d.id = dc.document_id
+            WHERE d.instrument_id = ${instrumentId} OR d.instrument_id IS NULL
+            ORDER BY dc.embedding_vector <=> CAST(${vectorString} AS vector)
+            LIMIT 5;
+          `
+        : await this.prisma.$queryRaw<any[]>`
+            SELECT 
+              d.title as "document_title", 
+              d.document_type as "document_type",
+              dc.chunk_text as "chunk_text", 
+              1 - (dc.embedding_vector <=> CAST(${vectorString} AS vector)) as "similarity_score"
+            FROM "DocumentChunk" dc
+            JOIN "Document" d ON d.id = dc.document_id
+            ORDER BY dc.embedding_vector <=> CAST(${vectorString} AS vector)
+            LIMIT 5;
+          `;
 
       return {
         results: results.map((r) => ({

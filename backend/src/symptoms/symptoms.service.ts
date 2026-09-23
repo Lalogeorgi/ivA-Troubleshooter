@@ -1,26 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateSymptomDto } from './dto/create-symptom.dto';
 import { UpdateSymptomDto } from './dto/update-symptom.dto';
 
 @Injectable()
 export class SymptomsService {
-  create(createSymptomDto: CreateSymptomDto) {
-    return 'This action adds a new symptom';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createSymptomDto: CreateSymptomDto) {
+    return this.prisma.symptom.create({
+      data: createSymptomDto as any,
+    });
   }
 
-  findAll() {
-    return `This action returns all symptoms`;
+  async findAll(instrumentId?: string) {
+    return this.prisma.symptom.findMany({
+      where: instrumentId ? { instrumentId } : undefined,
+      include: {
+        instrument: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} symptom`;
+  async findOne(id: string) {
+    const symptom = await this.prisma.symptom.findUnique({
+      where: { id },
+      include: {
+        instrument: true,
+        procedures: {
+          include: {
+            procedure: true,
+          },
+        },
+      },
+    });
+    if (!symptom) {
+      throw new NotFoundException(`Symptom with ID ${id} not found`);
+    }
+    return symptom;
   }
 
-  update(id: number, updateSymptomDto: UpdateSymptomDto) {
-    return `This action updates a #${id} symptom`;
+  async update(id: string, updateSymptomDto: UpdateSymptomDto) {
+    return this.prisma.symptom.update({
+      where: { id },
+      data: updateSymptomDto as any,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} symptom`;
+  async remove(id: string) {
+    return this.prisma.symptom.delete({
+      where: { id },
+    });
   }
 }

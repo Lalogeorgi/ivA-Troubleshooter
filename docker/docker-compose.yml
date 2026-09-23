@@ -1,11 +1,11 @@
 services:
   db:
-    image: postgres:16
+    image: pgvector/pgvector:pg16
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: iva_troubleshooter
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ivatroubleshooter
     ports:
       - "5432:5432"
     volumes:

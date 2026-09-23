@@ -1,6 +1,8 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
+import { isVersionInRange } from './semver.util';
+
 interface GetProceduresParams {
   instrumentId: string;
   firmwareVersion: string;
@@ -18,11 +20,6 @@ export class TroubleshootingService {
         'instrument_id and firmware_version are required',
       );
     }
-
-    // Convert firmware to a comparable format (simple float parsing for standard "X.Y" format)
-    const fw = parseFloat(params.firmwareVersion);
-    console.log('Incoming Params:', params);
-    console.log('Parsed Firmware:', fw);
 
     // Build the query to find completely matching procedures
     const procedures = await this.prisma.procedure.findMany({
@@ -54,6 +51,9 @@ export class TroubleshootingService {
       include: {
         steps: {
           orderBy: { stepNumber: 'asc' },
+          include: {
+            referenceDocument: true,
+          },
         },
         errorCodes: {
           include: { errorCode: true },
@@ -61,29 +61,15 @@ export class TroubleshootingService {
         symptoms: {
           include: { symptom: true },
         },
+        serviceBulletins: {
+          include: { serviceBulletin: true },
+        },
       },
     });
 
-    console.log(
-      'Found completely matching procedures (pre-fw filter):',
-      procedures.map((p) => p.id),
+    // Filter by firmware compatibility using robust semver utility
+    return procedures.filter((proc) =>
+      isVersionInRange(params.firmwareVersion, proc.firmwareMin, proc.firmwareMax),
     );
-
-    // Filter by firmware in memory due to Prisma SQLite lacking complex float comparison natively for string fields
-    const finalResults = procedures.filter((proc) => {
-      // If the procedure has no firmware bounds, it is compatible
-      if (!proc.firmwareMin && !proc.firmwareMax) return true;
-
-      const min = proc.firmwareMin ? parseFloat(proc.firmwareMin) : -Infinity;
-      const max = proc.firmwareMax ? parseFloat(proc.firmwareMax) : Infinity;
-
-      return fw >= min && fw <= max;
-    });
-
-    console.log(
-      'Final results after FW filter:',
-      finalResults.map((p) => p.id),
-    );
-    return finalResults;
   }
 }

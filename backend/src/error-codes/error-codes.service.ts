@@ -1,26 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateErrorCodeDto } from './dto/create-error-code.dto';
 import { UpdateErrorCodeDto } from './dto/update-error-code.dto';
 
 @Injectable()
 export class ErrorCodesService {
-  create(createErrorCodeDto: CreateErrorCodeDto) {
-    return 'This action adds a new errorCode';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createErrorCodeDto: CreateErrorCodeDto) {
+    return this.prisma.errorCode.create({
+      data: createErrorCodeDto as any,
+    });
   }
 
-  findAll() {
-    return `This action returns all errorCodes`;
+  async findAll(instrumentId?: string) {
+    return this.prisma.errorCode.findMany({
+      where: instrumentId ? { instrumentId } : undefined,
+      include: {
+        instrument: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} errorCode`;
+  async findOne(id: string) {
+    const code = await this.prisma.errorCode.findUnique({
+      where: { id },
+      include: {
+        instrument: true,
+        procedures: {
+          include: {
+            procedure: true,
+          },
+        },
+      },
+    });
+    if (!code) {
+      throw new NotFoundException(`Error code with ID ${id} not found`);
+    }
+    return code;
   }
 
-  update(id: number, updateErrorCodeDto: UpdateErrorCodeDto) {
-    return `This action updates a #${id} errorCode`;
+  async update(id: string, updateErrorCodeDto: UpdateErrorCodeDto) {
+    return this.prisma.errorCode.update({
+      where: { id },
+      data: updateErrorCodeDto as any,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} errorCode`;
+  async remove(id: string) {
+    return this.prisma.errorCode.delete({
+      where: { id },
+    });
   }
 }

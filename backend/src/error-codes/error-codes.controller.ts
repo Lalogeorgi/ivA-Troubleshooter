@@ -21,13 +21,13 @@ export class ErrorCodesController {
   }
 
   @Get()
-  findAll() {
-    return this.errorCodesService.findAll();
+  findAll(@Param('instrumentId') instrumentId?: string) {
+    return this.errorCodesService.findAll(instrumentId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.errorCodesService.findOne(+id);
+    return this.errorCodesService.findOne(id);
   }
 
   @Patch(':id')
@@ -35,11 +35,11 @@ export class ErrorCodesController {
     @Param('id') id: string,
     @Body() updateErrorCodeDto: UpdateErrorCodeDto,
   ) {
-    return this.errorCodesService.update(+id, updateErrorCodeDto);
+    return this.errorCodesService.update(id, updateErrorCodeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.errorCodesService.remove(+id);
+    return this.errorCodesService.remove(id);
   }
 }

@@ -20,7 +20,7 @@ export default function DocumentationSearchPage() {
   const [selectedDoc, setSelectedDoc] = useState<{ title: string; chunk: string } | null>(null);
 
   useEffect(() => {
-    const savedContext = localStorage.getItem('machineContext');
+    const savedContext = localStorage.getItem('current_intervention_context') || localStorage.getItem('machineContext');
     if (savedContext) {
       setMachineContext(JSON.parse(savedContext));
     }

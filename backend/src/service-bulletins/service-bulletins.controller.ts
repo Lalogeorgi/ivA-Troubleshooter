@@ -23,13 +23,13 @@ export class ServiceBulletinsController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceBulletinsService.findAll();
+  findAll(@Param('instrumentId') instrumentId?: string) {
+    return this.serviceBulletinsService.findAll(instrumentId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.serviceBulletinsService.findOne(+id);
+    return this.serviceBulletinsService.findOne(id);
   }
 
   @Patch(':id')
@@ -37,11 +37,11 @@ export class ServiceBulletinsController {
     @Param('id') id: string,
     @Body() updateServiceBulletinDto: UpdateServiceBulletinDto,
   ) {
-    return this.serviceBulletinsService.update(+id, updateServiceBulletinDto);
+    return this.serviceBulletinsService.update(id, updateServiceBulletinDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.serviceBulletinsService.remove(+id);
+    return this.serviceBulletinsService.remove(id);
   }
 }

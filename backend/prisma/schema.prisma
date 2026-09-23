@@ -13,8 +13,11 @@ model Instrument {
   id               String            @id @default(uuid())
   manufacturer     String
   model            String
+  modality         String?           // e.g. Clinical Chemistry, Immunoassay, Hematology
   description      String?
   machines         Machine[]
+  subsystems       Subsystem[]
+  installedAssets  InstalledAsset[]
   errorCodes       ErrorCode[]
   symptoms         Symptom[]
   procedures       Procedure[]
@@ -24,6 +27,154 @@ model Instrument {
   updatedAt        DateTime          @updatedAt
 }
 
+// Subsystems of an Instrument (Fluidics, Optics, Robotics, Thermal, Power, Reagent)
+model Subsystem {
+  id           String      @id @default(uuid())
+  instrumentId String      @map("instrument_id")
+  instrument   Instrument  @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  name         String
+  code         String      // e.g. "FLUIDICS", "OPTICS", "ROBOTICS"
+  description  String?
+  assemblies   Assembly[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@unique([instrumentId, code])
+}
+
+// Physical Assembly inside a Subsystem
+model Assembly {
+  id           String      @id @default(uuid())
+  subsystemId  String      @map("subsystem_id")
+  subsystem    Subsystem   @relation(fields: [subsystemId], references: [id], onDelete: Cascade)
+  name         String
+  locationCode String?     @map("location_code")
+  components   Component[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+// Concrete Physical Component
+model Component {
+  id                    String                 @id @default(uuid())
+  assemblyId            String                 @map("assembly_id")
+  assembly              Assembly               @relation(fields: [assemblyId], references: [id], onDelete: Cascade)
+  name                  String
+  partNumber            String                 @unique @map("part_number")
+  isFieldReplaceable    Boolean                @default(true) @map("is_field_replaceable")
+  expectedLifespanHours Float?                 @map("expected_lifespan_hours")
+  meshNodeId            String?                @map("mesh_node_id") // 3D glTF link
+  sensors               Sensor[]
+  actuators             Actuator[]
+  spareParts            SparePart[]
+  failureModes          ComponentFailureMode[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+}
+
+// Sensor instrumentation on a component
+model Sensor {
+  id           String    @id @default(uuid())
+  componentId  String    @map("component_id")
+  component    Component @relation(fields: [componentId], references: [id], onDelete: Cascade)
+  name         String
+  telemetryTag String    @map("telemetry_tag")
+  signalType   String    @map("signal_type") // ANALOG, DIGITAL, CAN, I2C
+  nominalMin   Float?    @map("nominal_min")
+  nominalMax   Float?    @map("nominal_max")
+  unit         String?
+  createdAt    DateTime  @default(now())
+}
+
+// Actuator control on a component
+model Actuator {
+  id              String    @id @default(uuid())
+  componentId     String    @map("component_id")
+  component       Component @relation(fields: [componentId], references: [id], onDelete: Cascade)
+  name            String
+  actuatorType    String    @map("actuator_type") // STEPPER_MOTOR, SOLENOID_VALVE, PUMP, HEATER
+  controlProtocol String?   @map("control_protocol")
+  createdAt       DateTime  @default(now())
+}
+
+// OEM Spare Parts Catalog
+model SparePart {
+  id            String     @id @default(uuid())
+  componentId   String?    @map("component_id")
+  component     Component? @relation(fields: [componentId], references: [id], onDelete: SetNull)
+  oemPartNumber String     @unique @map("oem_part_number")
+  description   String
+  unitCost      Float?     @map("unit_cost")
+  inventoryMin  Int        @default(1) @map("inventory_min")
+  createdAt     DateTime   @default(now())
+}
+
+// Customer Hospital / Clinical Site
+model CustomerSite {
+  id             String           @id @default(uuid())
+  name           String
+  hospitalSystem String?          @map("hospital_system")
+  city           String
+  country        String
+  address        String?
+  assets         InstalledAsset[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+// Installed Base Asset at a Customer Site
+model InstalledAsset {
+  id              String       @id @default(uuid())
+  instrumentId    String       @map("instrument_id")
+  instrument      Instrument   @relation(fields: [instrumentId], references: [id])
+  siteId          String       @map("site_id")
+  site            CustomerSite @relation(fields: [siteId], references: [id])
+  serialNumber    String       @unique @map("serial_number")
+  firmwareVersion String       @map("firmware_version")
+  installationDate DateTime    @default(now()) @map("installation_date")
+  status          String       @default("OPERATIONAL") // OPERATIONAL, DEGRADED, DOWN, MAINTENANCE
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+// Engineering Failure Modes
+model FailureMode {
+  id          String                 @id @default(uuid())
+  code        String                 @unique
+  title       String
+  description String?
+  components  ComponentFailureMode[]
+  createdAt   DateTime               @default(now())
+}
+
+// Component to Failure Mode junction with historical probability
+model ComponentFailureMode {
+  id                    String      @id @default(uuid())
+  componentId           String      @map("component_id")
+  component             Component   @relation(fields: [componentId], references: [id], onDelete: Cascade)
+  failureModeId         String      @map("failure_mode_id")
+  failureMode           FailureMode @relation(fields: [failureModeId], references: [id], onDelete: Cascade)
+  historicalProbability Float       @default(0.1) @map("historical_probability")
+
+  @@unique([componentId, failureModeId])
+}
+
+// Knowledge Graph Relational Edges
+model KnowledgeEdge {
+  id           String   @id @default(uuid())
+  sourceId     String   @map("source_id")
+  sourceType   String   @map("source_type")
+  targetId     String   @map("target_id")
+  targetType   String   @map("target_type")
+  relationship String   // AFFECTS, RESOLVES, INDICATES, REPLACES, REFERENCES
+  weight       Float    @default(1.0)
+  createdAt    DateTime @default(now())
+
+  @@index([sourceId])
+  @@index([targetId])
+}
+
+// Legacy Machine model preserved for backward compatibility
 model Machine {
   id               String                @id @default(uuid())
   instrumentId     String                @map("instrument_id")
@@ -179,9 +330,24 @@ model Document {
   instrument     Instrument?     @relation(fields: [instrumentId], references: [id], onDelete: SetNull)
   documentType   String          @map("document_type") // service_manual, installation_guide, etc.
   filePath       String          @map("file_path")
+  pages          DocumentPage[]
   chunks         DocumentChunk[]
   procedureSteps ProcedureStep[]
   uploadedAt     DateTime        @default(now()) @map("uploaded_at")
+}
+
+model DocumentPage {
+  id           String   @id @default(uuid())
+  documentId   String   @map("document_id")
+  document     Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  pageNumber   Int      @map("page_number")
+  width        Float    @default(612.0)
+  height       Float    @default(792.0)
+  rawText      String   @map("raw_text")
+  thumbnailUrl String?  @map("thumbnail_url")
+  createdAt    DateTime @default(now())
+
+  @@unique([documentId, pageNumber])
 }
 
 model DocumentChunk {
@@ -189,5 +355,32 @@ model DocumentChunk {
   documentId      String                 @map("document_id")
   document        Document               @relation(fields: [documentId], references: [id], onDelete: Cascade)
   chunkText       String                 @map("chunk_text")
+  pageNumber      Int?                   @map("page_number")
+  sectionTitle    String?                @map("section_title")
+  boundingBox     Json?                  @map("bounding_box")
+  chunkType       String                 @default("TEXT") @map("chunk_type") // TEXT, TABLE, WARNING, CAUTION, PROCEDURE_STEP, FIGURE_CAPTION
+  tokenCount      Int?                   @map("token_count")
   embeddingVector Unsupported("vector")? @map("embedding_vector")
+  createdAt       DateTime               @default(now())
 }
+
+// Agent Diagnostic Execution Audit Trail
+model AgentExecutionTrace {
+  id                String   @id @default(uuid())
+  sessionId         String?  @map("session_id")
+  instrumentId      String?  @map("instrument_id")
+  prompt            String
+  provider          String   // ollama, openai, mock
+  model             String
+  toolsCalled       Json?    @map("tools_called")
+  retrievedEvidence Json?    @map("retrieved_evidence")
+  finalResponse     String   @map("final_response")
+  tokenCount        Int?     @map("token_count")
+  latencyMs         Int?     @map("latency_ms")
+  createdAt         DateTime @default(now())
+
+  @@index([sessionId])
+  @@index([instrumentId])
+}
+
+

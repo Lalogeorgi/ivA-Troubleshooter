@@ -19,7 +19,8 @@ export const searchDocumentationTool = tool(
       }
 
       const data = await response.json();
-      return JSON.stringify(data.slice(0, 3)); // Return top 3 semantic matches
+      const results = Array.isArray(data) ? data : (data.results || []);
+      return JSON.stringify(results.slice(0, 3)); // Return top 3 semantic matches
     } catch (e: any) {
       return `Error retrieving documentation: ${e.message}`;
     }

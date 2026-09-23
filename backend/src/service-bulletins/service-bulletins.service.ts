@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateServiceBulletinDto } from './dto/create-service-bulletin.dto';
 import { UpdateServiceBulletinDto } from './dto/update-service-bulletin.dto';
 
 @Injectable()
 export class ServiceBulletinsService {
-  create(createServiceBulletinDto: CreateServiceBulletinDto) {
-    return 'This action adds a new serviceBulletin';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createServiceBulletinDto: CreateServiceBulletinDto) {
+    return this.prisma.serviceBulletin.create({
+      data: createServiceBulletinDto as any,
+    });
   }
 
-  findAll() {
-    return `This action returns all serviceBulletins`;
+  async findAll(instrumentId?: string) {
+    return this.prisma.serviceBulletin.findMany({
+      where: instrumentId ? { instrumentId } : undefined,
+      include: {
+        instrument: true,
+        procedures: {
+          include: {
+            procedure: true,
+          },
+        },
+      },
+      orderBy: { releaseDate: 'desc' },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} serviceBulletin`;
+  async findOne(id: string) {
+    const bulletin = await this.prisma.serviceBulletin.findUnique({
+      where: { id },
+      include: {
+        instrument: true,
+        procedures: {
+          include: {
+            procedure: true,
+          },
+        },
+      },
+    });
+    if (!bulletin) {
+      throw new NotFoundException(`Service Bulletin with ID ${id} not found`);
+    }
+    return bulletin;
   }
 
-  update(id: number, updateServiceBulletinDto: UpdateServiceBulletinDto) {
-    return `This action updates a #${id} serviceBulletin`;
+  async update(id: string, updateServiceBulletinDto: UpdateServiceBulletinDto) {
+    return this.prisma.serviceBulletin.update({
+      where: { id },
+      data: updateServiceBulletinDto as any,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} serviceBulletin`;
+  async remove(id: string) {
+    return this.prisma.serviceBulletin.delete({
+      where: { id },
+    });
   }
 }

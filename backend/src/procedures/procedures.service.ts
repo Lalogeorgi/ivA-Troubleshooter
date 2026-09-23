@@ -7,20 +7,61 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ProceduresService {
   constructor(private prisma: PrismaService) {}
 
-  create(createProcedureDto: CreateProcedureDto) {
-    return 'This action adds a new procedure';
+  async create(createProcedureDto: CreateProcedureDto) {
+    return this.prisma.procedure.create({
+      data: createProcedureDto as any,
+    });
   }
 
-  findAll() {
-    return this.prisma.procedure.findMany();
+  async findAll(instrumentId?: string) {
+    return this.prisma.procedure.findMany({
+      where: instrumentId ? { instrumentId } : undefined,
+      include: {
+        steps: {
+          orderBy: { stepNumber: 'asc' },
+          include: {
+            referenceDocument: true,
+          },
+        },
+        errorCodes: {
+          include: {
+            errorCode: true,
+          },
+        },
+        symptoms: {
+          include: {
+            symptom: true,
+          },
+        },
+      },
+    });
   }
 
   async findOne(id: string) {
     const procedure = await this.prisma.procedure.findUnique({
       where: { id },
       include: {
+        instrument: true,
         steps: {
           orderBy: { stepNumber: 'asc' },
+          include: {
+            referenceDocument: true,
+          },
+        },
+        errorCodes: {
+          include: {
+            errorCode: true,
+          },
+        },
+        symptoms: {
+          include: {
+            symptom: true,
+          },
+        },
+        serviceBulletins: {
+          include: {
+            serviceBulletin: true,
+          },
         },
       },
     });
@@ -32,11 +73,16 @@ export class ProceduresService {
     return procedure;
   }
 
-  update(id: string, updateProcedureDto: UpdateProcedureDto) {
-    return `This action updates a #${id} procedure`;
+  async update(id: string, updateProcedureDto: UpdateProcedureDto) {
+    return this.prisma.procedure.update({
+      where: { id },
+      data: updateProcedureDto as any,
+    });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} procedure`;
+  async remove(id: string) {
+    return this.prisma.procedure.delete({
+      where: { id },
+    });
   }
 }

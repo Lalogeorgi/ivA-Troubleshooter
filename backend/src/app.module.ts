@@ -13,10 +13,18 @@ import { ProcedureStepsModule } from './procedure-steps/procedure-steps.module';
 import { ServiceBulletinsModule } from './service-bulletins/service-bulletins.module';
 import { TroubleshootingModule } from './troubleshooting/troubleshooting.module';
 import { KnowledgeSearchModule } from './knowledge-search/knowledge-search.module';
+import { OntologyModule } from './ontology/ontology.module';
+import { VaultModule } from './vault/vault.module';
+import { DocumentsModule } from './knowledge-ingestion/documents.module';
+import { AgentModule } from './agent/agent.module';
 
 @Module({
   imports: [
     PrismaModule,
+    OntologyModule,
+    VaultModule,
+    DocumentsModule,
+    AgentModule,
     InstrumentsModule,
     MachinesModule,
     InterventionSessionsModule,

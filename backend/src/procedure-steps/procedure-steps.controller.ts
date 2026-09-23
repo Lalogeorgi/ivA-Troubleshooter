@@ -21,13 +21,13 @@ export class ProcedureStepsController {
   }
 
   @Get()
-  findAll() {
-    return this.procedureStepsService.findAll();
+  findAll(@Param('procedureId') procedureId?: string) {
+    return this.procedureStepsService.findAll(procedureId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.procedureStepsService.findOne(+id);
+    return this.procedureStepsService.findOne(id);
   }
 
   @Patch(':id')
@@ -35,11 +35,11 @@ export class ProcedureStepsController {
     @Param('id') id: string,
     @Body() updateProcedureStepDto: UpdateProcedureStepDto,
   ) {
-    return this.procedureStepsService.update(+id, updateProcedureStepDto);
+    return this.procedureStepsService.update(id, updateProcedureStepDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.procedureStepsService.remove(+id);
+    return this.procedureStepsService.remove(id);
   }
 }
