@@ -6,16 +6,13 @@ import {
   Wrench,
   AlertTriangle,
   CheckCircle2,
-  Clock,
   Building2,
   Cpu,
   FileText,
   Activity,
-  ChevronRight,
   ShieldAlert,
   Sliders,
   Sparkles,
-  Layers,
   ArrowLeft,
   Check,
   X,
@@ -23,7 +20,6 @@ import {
   Printer,
   Compass,
   CornerDownRight,
-  Info,
 } from 'lucide-react';
 import {
   fetchCase,
@@ -31,7 +27,6 @@ import {
   recordCaseStep,
   requestCaseApproval,
   grantCaseApproval,
-  updateCaseStatus,
   generateCaseReport,
   runAgentDiagnostic,
   fetchDocuments,
@@ -263,11 +258,11 @@ export default function CaseWorkspacePage({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-8">
-        <div className="flex items-center gap-3 text-cyan-400">
+      <div className="min-h-screen bg-[#0a1120] text-slate-100 flex items-center justify-center p-8">
+        <div className="flex items-center gap-3 text-sky-400">
           <Activity className="w-6 h-6 animate-spin" />
           <span className="text-sm font-semibold tracking-wider uppercase font-mono">
-            Initializing FSE Case Workspace...
+            Initializing FSE Diagnostic Workspace...
           </span>
         </div>
       </div>
@@ -276,13 +271,13 @@ export default function CaseWorkspacePage({
 
   if (error || !serviceCase) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 p-8 flex flex-col items-center justify-center">
-        <AlertTriangle className="w-12 h-12 text-red-400 mb-4" />
+      <div className="min-h-screen bg-[#0a1120] text-slate-100 p-8 flex flex-col items-center justify-center">
+        <AlertTriangle className="w-12 h-12 text-rose-400 mb-4" />
         <h2 className="text-xl font-bold text-white mb-2">Service Case Not Found</h2>
         <p className="text-slate-400 text-sm mb-6">{error || 'Could not load service case details.'}</p>
         <Link
           href="/workspace"
-          className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium"
+          className="btn-touch-56 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold focus-ring"
         >
           Return to Operations Center
         </Link>
@@ -293,32 +288,32 @@ export default function CaseWorkspacePage({
   const pendingApprovals = (serviceCase.approvals || []).filter((a) => a.status === 'PENDING');
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-[#0a1120] text-slate-100 flex flex-col">
       {/* Top Workspace Header */}
-      <header className="px-6 py-4 bg-slate-900/90 border-b border-slate-800 backdrop-blur sticky top-0 z-40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <header className="px-6 py-4 bg-[#111c30]/95 border-b border-[#1e2e4a] backdrop-blur sticky top-0 z-40 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Link
             href="/workspace"
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="p-2.5 rounded-xl bg-[#0a1120] hover:bg-slate-800 text-slate-300 border border-[#1e2e4a] transition-colors focus-ring"
             title="Return to Cases"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-sm font-bold text-cyan-400">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <span className="font-mono text-sm font-bold text-sky-400 tracking-wide">
                 {serviceCase.caseNumber}
               </span>
               <span className="text-slate-600">•</span>
-              <span className="font-semibold text-white text-sm">
+              <span className="font-bold text-white text-sm">
                 {serviceCase.asset?.instrument?.model || 'Clinical Analyzer'}
               </span>
-              <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-slate-300 border border-slate-700">
-                S/N {serviceCase.asset?.serialNumber}
+              <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-[#0a1120] text-slate-300 border border-[#1e2e4a]">
+                S/N: {serviceCase.asset?.serialNumber}
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
-              <span>{serviceCase.asset?.site?.name}</span>
+            <p className="text-xs text-slate-400 mt-1 flex items-center gap-2">
+              <span className="text-slate-300 font-medium">{serviceCase.asset?.site?.name}</span>
               <span className="text-slate-600">•</span>
               <span>FSE: {serviceCase.engineerName} ({serviceCase.engineerId})</span>
             </p>
@@ -327,9 +322,9 @@ export default function CaseWorkspacePage({
 
         <div className="flex items-center gap-3">
           {/* Status Badge */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800">
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0a1120] border border-[#1e2e4a]">
             <span className="text-[11px] text-slate-400 uppercase font-mono tracking-wider">Status:</span>
-            <span className="text-xs font-bold text-cyan-300 uppercase tracking-wide">
+            <span className="text-xs font-bold font-mono text-sky-300 uppercase tracking-wide">
               {serviceCase.status.replace('_', ' ')}
             </span>
           </div>
@@ -338,9 +333,9 @@ export default function CaseWorkspacePage({
           {pendingApprovals.length > 0 && (
             <button
               onClick={() => setShowApprovalModal(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold animate-bounce shadow-lg shadow-red-950 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-600/90 hover:bg-amber-500 text-white text-xs font-semibold shadow-lg shadow-amber-950/40 border border-amber-400/30 transition-all focus-ring"
             >
-              <ShieldAlert className="w-4 h-4" />
+              <ShieldAlert className="w-4 h-4 text-amber-200" />
               <span>{pendingApprovals.length} Approval Required</span>
             </button>
           )}
@@ -348,10 +343,10 @@ export default function CaseWorkspacePage({
           {/* Report Generation */}
           <button
             onClick={handleGenerateReport}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0a1120] hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-[#1e2e4a] transition-colors focus-ring"
           >
-            <FileText className="w-4 h-4 text-cyan-400" />
-            <span>Field Service Report</span>
+            <FileText className="w-4 h-4 text-sky-400" />
+            <span>Field Report</span>
           </button>
         </div>
       </header>
@@ -359,17 +354,17 @@ export default function CaseWorkspacePage({
       {/* Main Workspace Grid: 3-column on large screens */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden">
         {/* Left Column (3 cols): Asset Identity, Telemetry Specs, Step History */}
-        <div className="lg:col-span-3 border-r border-slate-800 bg-slate-900/40 p-5 overflow-y-auto space-y-6">
+        <div className="lg:col-span-3 border-r border-[#1e2e4a] bg-[#0c1629]/60 p-5 overflow-y-auto space-y-5">
           {/* Asset & Hospital Spec */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800/80 shadow">
+          <div className="p-4 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-cyan-400" />
+              <Building2 className="w-4 h-4 text-sky-400" />
               <span>Hospital Installation</span>
             </div>
             <div className="space-y-2 text-xs">
               <div>
                 <span className="text-slate-500 block">Facility Name</span>
-                <span className="font-medium text-slate-200">{serviceCase.asset?.site?.name}</span>
+                <span className="font-semibold text-slate-200">{serviceCase.asset?.site?.name}</span>
               </div>
               <div>
                 <span className="text-slate-500 block">Location</span>
@@ -385,30 +380,30 @@ export default function CaseWorkspacePage({
           </div>
 
           {/* Instrument Technical Spec */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800/80 shadow">
+          <div className="p-4 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-cyan-400" />
+              <Cpu className="w-4 h-4 text-sky-400" />
               <span>Equipment Telemetry</span>
             </div>
-            <div className="space-y-2 text-xs font-mono">
+            <div className="space-y-2.5 text-xs font-mono">
               <div className="flex justify-between">
                 <span className="text-slate-500">Firmware:</span>
-                <span className="text-slate-200">{serviceCase.asset?.firmwareVersion}</span>
+                <span className="font-semibold text-slate-200">{serviceCase.asset?.firmwareVersion}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Modality:</span>
-                <span className="text-slate-200">{serviceCase.asset?.instrument?.modality || 'Clinical Chemistry'}</span>
+                <span className="font-semibold text-slate-200">{serviceCase.asset?.instrument?.modality || 'Clinical Chemistry'}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Subsystems:</span>
-                <span className="text-cyan-400 font-sans text-xs">6 Assemblies</span>
+                <span className="text-sky-400 font-sans font-medium text-xs">6 Assemblies</span>
               </div>
             </div>
           </div>
 
           {/* Consumed Spare Parts */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800/80 shadow">
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+          <div className="p-4 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5 flex items-center justify-between">
               <span>Consumed Spare Parts</span>
               <span className="text-slate-500 text-[10px] font-mono">
                 {serviceCase.partsReplaced?.length || 0} items
@@ -419,8 +414,8 @@ export default function CaseWorkspacePage({
             ) : (
               <ul className="space-y-2 text-xs mt-2">
                 {serviceCase.partsReplaced.map((p, idx) => (
-                  <li key={idx} className="p-2 rounded bg-slate-950 border border-slate-800 flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <li key={idx} className="p-2.5 rounded-xl bg-[#0a1120] border border-[#1e2e4a] flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="font-semibold text-slate-200 block">{p.part}</span>
                       <span className="text-[10px] text-slate-500 block">
@@ -434,8 +429,8 @@ export default function CaseWorkspacePage({
           </div>
 
           {/* Physical Measurements Audit */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800/80 shadow">
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+          <div className="p-4 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5 flex items-center justify-between">
               <span>Recorded Measurements</span>
               <span className="text-slate-500 text-[10px] font-mono">
                 {serviceCase.measurements?.length || 0} checks
@@ -444,23 +439,23 @@ export default function CaseWorkspacePage({
             {!serviceCase.measurements || serviceCase.measurements.length === 0 ? (
               <p className="text-xs text-slate-500 italic">No measurements recorded.</p>
             ) : (
-              <div className="space-y-1.5 mt-2">
+              <div className="space-y-2 mt-2">
                 {serviceCase.measurements.map((m, idx) => (
                   <div
                     key={idx}
-                    className="p-2 rounded bg-slate-950 border border-slate-800 flex items-center justify-between text-xs font-mono"
+                    className="p-2.5 rounded-xl bg-[#0a1120] border border-[#1e2e4a] flex items-center justify-between text-xs font-mono"
                   >
                     <div>
-                      <span className="text-slate-300 block text-[11px] truncate max-w-[150px]">{m.target}</span>
-                      <span className="text-slate-400 text-[10px]">
+                      <span className="text-slate-300 block text-[11px] truncate max-w-[140px] font-sans font-medium">{m.target}</span>
+                      <span className="text-slate-400 text-[10px] font-telemetry">
                         {m.measured} {m.unit || ''}
                       </span>
                     </div>
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                         m.inTolerance
-                          ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                          : 'bg-red-950 text-red-400 border border-red-800'
+                          ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/60'
+                          : 'bg-rose-950/80 text-rose-300 border border-rose-700/60'
                       }`}
                     >
                       {m.inTolerance ? 'PASS' : 'FAIL'}
@@ -473,78 +468,78 @@ export default function CaseWorkspacePage({
         </div>
 
         {/* Center Column (5 cols): Interactive Diagnostic Stepper & Tolerance Engine */}
-        <div className="lg:col-span-5 p-6 overflow-y-auto border-r border-slate-800 flex flex-col justify-between">
+        <div className="lg:col-span-5 p-6 overflow-y-auto border-r border-[#1e2e4a] flex flex-col justify-between">
           <div className="space-y-6">
             {/* Procedure Banner */}
             {tree && (
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-800/40">
-                <div className="flex items-center gap-2.5">
-                  <Sliders className="w-4 h-4 text-cyan-400" />
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-sky-950/40 border border-sky-800/50">
+                <div className="flex items-center gap-3">
+                  <Sliders className="w-5 h-5 text-sky-400 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-sky-400 font-bold block">
                       Active Diagnostic Protocol
                     </span>
-                    <span className="text-xs font-semibold text-slate-200">{tree.title}</span>
+                    <span className="text-sm font-bold text-slate-100">{tree.title}</span>
                   </div>
                 </div>
-                <span className="text-[11px] font-mono text-cyan-300/80 bg-cyan-900/40 px-2 py-0.5 rounded">
-                  {tree.nodes.length} Steps Tree
+                <span className="text-xs font-mono font-semibold text-sky-300 bg-sky-900/50 px-2.5 py-1 rounded-lg border border-sky-700/40">
+                  {tree.nodes.length} Steps
                 </span>
               </div>
             )}
 
             {/* Active Step Card */}
             {currentNode ? (
-              <div className="p-6 rounded-2xl bg-slate-900 border border-slate-700/80 shadow-xl space-y-5">
+              <div className="p-7 rounded-2xl bg-[#111c30] border border-[#2a3d60] shadow-xl space-y-6">
                 {/* Step Metadata Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40">
                       Step {currentNode.stepNumber} of {tree?.nodes.length || 8}
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wider uppercase bg-[#0a1120] text-slate-300 border border-[#1e2e4a]">
                       {currentNode.nodeType.replace('_', ' ')}
                     </span>
                   </div>
-                  <span className="font-mono text-xs text-slate-500">{currentNode.key}</span>
+                  <span className="font-mono text-xs text-slate-400 font-semibold">{currentNode.key}</span>
                 </div>
 
                 {/* Step Title & Instruction */}
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-2">{currentNode.title}</h2>
+                  <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">{currentNode.title}</h2>
                   <p className="text-sm text-slate-300 leading-relaxed">{currentNode.instruction}</p>
                 </div>
 
                 {/* Warning Callout */}
                 {currentNode.warning && (
-                  <div className="p-3.5 rounded-xl bg-amber-950/40 border border-amber-600/50 flex items-start gap-3">
+                  <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-600/60 flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-xs font-bold text-amber-300 uppercase tracking-wide block">
                         Safety & Compliance Warning
                       </span>
-                      <p className="text-xs text-amber-200/90 mt-0.5">{currentNode.warning}</p>
+                      <p className="text-xs text-amber-200/90 mt-1 leading-relaxed">{currentNode.warning}</p>
                     </div>
                   </div>
                 )}
 
                 {/* Required Tool */}
                 {currentNode.requiredTool && (
-                  <div className="text-xs text-slate-400 flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
-                    <Wrench className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Required Tool: <strong className="text-slate-200">{currentNode.requiredTool}</strong></span>
+                  <div className="text-xs text-slate-300 flex items-center gap-2.5 p-3 rounded-xl bg-[#0a1120] border border-[#1e2e4a]">
+                    <Wrench className="w-4 h-4 text-sky-400 shrink-0" />
+                    <span>Required Tool: <strong className="text-white">{currentNode.requiredTool}</strong></span>
                   </div>
                 )}
 
                 {/* Interactive Mode: MEASUREMENT with Tolerance Bar */}
                 {currentNode.nodeType === 'MEASUREMENT' && (
-                  <div className="space-y-4 pt-3 border-t border-slate-800">
+                  <div className="space-y-4 pt-4 border-t border-[#1e2e4a]">
                     <div className="flex items-center justify-between">
                       <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                         Physical Measurement: {currentNode.measurementTarget || 'Target'}
                       </label>
                       {currentNode.nominalMin !== null && currentNode.nominalMax !== null && (
-                        <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60">
+                        <span className="text-xs font-mono font-semibold text-sky-400 bg-sky-950/70 px-2.5 py-1 rounded-md border border-sky-800/60">
                           Nominal: {currentNode.nominalMin} – {currentNode.nominalMax} {currentNode.unit || ''}
                         </span>
                       )}
@@ -557,22 +552,22 @@ export default function CaseWorkspacePage({
                         placeholder={`Enter measured value in ${currentNode.unit || ''}...`}
                         value={measurementInput}
                         onChange={(e) => setMeasurementInput(e.target.value)}
-                        className={`w-full px-4 py-3 text-lg font-mono rounded-xl bg-slate-950 border focus:outline-none transition-colors ${
+                        className={`w-full min-h-[56px] px-4 py-3 text-lg font-telemetry rounded-xl bg-[#0a1120] border focus-ring outline-none transition-colors ${
                           hasMeasurementValue
                             ? isInTolerance
                               ? 'border-emerald-500 text-emerald-300'
-                              : 'border-red-500 text-red-300'
-                            : 'border-slate-700 text-white focus:border-cyan-500'
+                              : 'border-rose-500 text-rose-300'
+                            : 'border-[#1e2e4a] text-white focus:border-sky-500'
                         }`}
                       />
                       {hasMeasurementValue && (
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-xs font-bold font-mono">
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-xs font-bold font-mono">
                           {isInTolerance ? (
-                            <span className="flex items-center gap-1 text-emerald-400">
+                            <span className="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-600/40">
                               <CheckCircle2 className="w-4 h-4" /> IN TOLERANCE
                             </span>
                           ) : (
-                            <span className="flex items-center gap-1 text-red-400">
+                            <span className="flex items-center gap-1.5 text-rose-400 bg-rose-950/80 px-2.5 py-1 rounded-md border border-rose-600/40">
                               <AlertTriangle className="w-4 h-4" /> OUT OF TOLERANCE
                             </span>
                           )}
@@ -582,20 +577,20 @@ export default function CaseWorkspacePage({
 
                     {/* Visual Tolerance Gauge */}
                     {currentNode.nominalMin !== null && currentNode.nominalMax !== null && (
-                      <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-2">
-                        <div className="flex justify-between text-[10px] font-mono text-slate-500">
+                      <div className="p-3.5 rounded-xl bg-[#0a1120] border border-[#1e2e4a] space-y-2">
+                        <div className="flex justify-between text-[11px] font-mono text-slate-400">
                           <span>Min: {currentNode.nominalMin}</span>
-                          <span className="text-cyan-400">
-                            Center: {((currentNode.nominalMin + currentNode.nominalMax) / 2).toFixed(1)} {currentNode.unit}
+                          <span className="text-sky-400 font-semibold">
+                            Target Center: {((currentNode.nominalMin + currentNode.nominalMax) / 2).toFixed(1)} {currentNode.unit}
                           </span>
                           <span>Max: {currentNode.nominalMax}</span>
                         </div>
-                        <div className="h-2 w-full bg-slate-800 rounded-full relative overflow-hidden">
-                          <div className="absolute inset-y-0 left-1/4 right-1/4 bg-emerald-500/30 border-x border-emerald-500/50" />
+                        <div className="h-2.5 w-full bg-slate-800 rounded-full relative overflow-hidden">
+                          <div className="absolute inset-y-0 left-1/4 right-1/4 bg-emerald-500/25 border-x border-emerald-500/40" />
                           {hasMeasurementValue && (
                             <div
-                              className={`absolute top-0 bottom-0 w-2.5 rounded-full ${
-                                isInTolerance ? 'bg-emerald-400 shadow-lg shadow-emerald-500' : 'bg-red-500 shadow-lg shadow-red-500'
+                              className={`absolute top-0 bottom-0 w-3 rounded-full transition-all ${
+                                isInTolerance ? 'bg-emerald-400 shadow-md shadow-emerald-500' : 'bg-rose-500 shadow-md shadow-rose-500'
                               }`}
                               style={{
                                 left: `${Math.max(
@@ -621,16 +616,17 @@ export default function CaseWorkspacePage({
                         placeholder="Optional technician notes on this measurement..."
                         value={technicianNotes}
                         onChange={(e) => setTechnicianNotes(e.target.value)}
-                        className="w-full px-3 py-2 text-xs bg-slate-950 border border-slate-800 rounded-lg text-slate-200 focus:outline-none focus:border-cyan-500"
+                        className="w-full px-4 py-3 text-xs bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-200 placeholder-slate-500 focus-ring outline-none"
                       />
                     </div>
 
+                    {/* 56px Gloved Touch Button */}
                     <button
                       onClick={handleCommitMeasurement}
                       disabled={isProcessingStep || !hasMeasurementValue}
-                      className="w-full py-3 rounded-xl font-bold text-sm bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-40 shadow-lg shadow-cyan-950 transition-all flex items-center justify-center gap-2"
+                      className="btn-touch-56 w-full font-bold text-sm bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-40 shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 focus-ring"
                     >
-                      <Check className="w-4 h-4" />
+                      <Check className="w-5 h-5" />
                       <span>{isProcessingStep ? 'Evaluating Tolerances...' : 'Evaluate & Commit Measurement'}</span>
                     </button>
                   </div>
@@ -638,13 +634,13 @@ export default function CaseWorkspacePage({
 
                 {/* Interactive Mode: APPROVAL_GATE */}
                 {currentNode.nodeType === 'APPROVAL_GATE' && (
-                  <div className="space-y-4 pt-3 border-t border-slate-800">
-                    <div className="p-4 rounded-xl bg-purple-950/40 border border-purple-600/50 space-y-2">
-                      <div className="flex items-center gap-2 text-purple-300 font-bold text-xs uppercase tracking-wide">
-                        <ShieldAlert className="w-4 h-4 text-purple-400" />
+                  <div className="space-y-4 pt-4 border-t border-[#1e2e4a]">
+                    <div className="p-4 rounded-xl bg-amber-950/30 border border-amber-600/50 space-y-2">
+                      <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wide">
+                        <ShieldAlert className="w-4 h-4 text-amber-400" />
                         <span>Consequential Action: Human-in-the-Loop Gate</span>
                       </div>
-                      <p className="text-xs text-purple-200 leading-relaxed">
+                      <p className="text-xs text-amber-200 leading-relaxed">
                         This operation requires authorized FSE review before proceeding:
                         {currentNode.recommendedPart && (
                           <strong className="block text-white mt-1">
@@ -657,9 +653,9 @@ export default function CaseWorkspacePage({
                     <button
                       onClick={handleRequestApproval}
                       disabled={isProcessingStep}
-                      className="w-full py-3 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-500 text-white disabled:opacity-40 shadow-lg shadow-purple-950 transition-all flex items-center justify-center gap-2"
+                      className="btn-touch-56 w-full font-bold text-sm bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-40 shadow-lg shadow-amber-950/40 transition-all flex items-center justify-center gap-2 focus-ring"
                     >
-                      <ShieldAlert className="w-4 h-4" />
+                      <ShieldAlert className="w-5 h-5" />
                       <span>Request Human Approval Gate</span>
                     </button>
                   </div>
@@ -670,14 +666,14 @@ export default function CaseWorkspacePage({
                   currentNode.nodeType === 'ACTION' ||
                   currentNode.nodeType === 'DECISION' ||
                   currentNode.nodeType === 'REPLACEMENT') && (
-                  <div className="space-y-4 pt-3 border-t border-slate-800">
+                  <div className="space-y-4 pt-4 border-t border-[#1e2e4a]">
                     <div>
                       <input
                         type="text"
                         placeholder="Optional technician observations or findings..."
                         value={technicianNotes}
                         onChange={(e) => setTechnicianNotes(e.target.value)}
-                        className="w-full px-3 py-2 text-xs bg-slate-950 border border-slate-800 rounded-lg text-slate-200 focus:outline-none focus:border-cyan-500"
+                        className="w-full px-4 py-3 text-xs bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-200 placeholder-slate-500 focus-ring outline-none"
                       />
                     </div>
 
@@ -685,9 +681,9 @@ export default function CaseWorkspacePage({
                       <button
                         onClick={() => handleCompleteStep('DONE')}
                         disabled={isProcessingStep}
-                        className="flex-1 py-3 rounded-xl font-bold text-sm bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-40 shadow-lg shadow-cyan-950 transition-all flex items-center justify-center gap-2"
+                        className="btn-touch-56 flex-1 font-bold text-sm bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-40 shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 focus-ring"
                       >
-                        <Check className="w-4 h-4" />
+                        <Check className="w-5 h-5" />
                         <span>
                           {currentNode.nodeType === 'SAFETY_CHECK'
                             ? 'Acknowledge Safety & Proceed'
@@ -698,7 +694,7 @@ export default function CaseWorkspacePage({
                       <button
                         onClick={() => handleCompleteStep('SKIPPED')}
                         disabled={isProcessingStep}
-                        className="px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors"
+                        className="btn-touch-56 px-5 text-xs font-semibold bg-[#0a1120] hover:bg-slate-800 text-slate-300 border border-[#1e2e4a] transition-colors focus-ring"
                       >
                         Skip Step
                       </button>
@@ -707,15 +703,15 @@ export default function CaseWorkspacePage({
                 )}
               </div>
             ) : (
-              <div className="p-8 rounded-2xl bg-slate-900 border border-slate-800 text-center space-y-4">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h3 className="text-xl font-bold text-white">Diagnostic Protocol Completed</h3>
-                <p className="text-sm text-slate-400 max-w-md mx-auto">
+              <div className="p-8 rounded-2xl bg-[#111c30] border border-[#1e2e4a] text-center space-y-4">
+                <CheckCircle2 className="w-14 h-14 text-emerald-400 mx-auto" />
+                <h3 className="text-2xl font-bold text-white">Diagnostic Protocol Completed</h3>
+                <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
                   All diagnostic and verification steps have executed. The instrument is ready for final sign-off and Return-to-Service report generation.
                 </p>
                 <button
                   onClick={handleGenerateReport}
-                  className="px-6 py-2.5 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950"
+                  className="btn-touch-56 px-8 font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/40 focus-ring"
                 >
                   Generate & Sign Field Service Report
                 </button>
@@ -723,10 +719,10 @@ export default function CaseWorkspacePage({
             )}
 
             {/* Step History Timeline */}
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#111c30]/80 border border-[#1e2e4a] space-y-3">
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
                 <span>Intervention Audit Timeline</span>
-                <span className="font-mono text-[10px] text-slate-500">
+                <span className="font-mono text-[10px] text-slate-400 font-semibold">
                   {serviceCase.stepHistory?.length || 0} executed
                 </span>
               </div>
@@ -734,28 +730,28 @@ export default function CaseWorkspacePage({
               {!serviceCase.stepHistory || serviceCase.stepHistory.length === 0 ? (
                 <p className="text-xs text-slate-500 italic">No steps recorded yet.</p>
               ) : (
-                <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
+                <div className="space-y-2.5 max-h-60 overflow-y-auto pr-1">
                   {serviceCase.stepHistory.map((s, idx) => (
                     <div
                       key={idx}
-                      className="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 text-xs space-y-1"
+                      className="p-3 rounded-xl bg-[#0a1120] border border-[#1e2e4a] text-xs space-y-1.5"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-slate-200">
+                        <span className="font-semibold text-slate-200">
                           {idx + 1}. {s.title}
                         </span>
                         <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
                             s.status === 'PASS'
-                              ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                              : 'bg-red-950 text-red-400 border border-red-800'
+                              ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/60'
+                              : 'bg-rose-950 text-rose-300 border border-rose-700/60'
                           }`}
                         >
                           {s.status}
                         </span>
                       </div>
                       {s.measuredValue !== undefined && (
-                        <p className="text-[11px] font-mono text-cyan-400">
+                        <p className="text-[11px] font-telemetry text-sky-400">
                           Measured: {s.measuredValue} {s.unit || ''} (Nominal: {s.nominalMin} – {s.nominalMax})
                         </p>
                       )}
@@ -771,38 +767,38 @@ export default function CaseWorkspacePage({
         {/* Right Column (4 cols): Multi-Mode Intelligence Inspector (AI Agent / PDF Manual / 3D Digital Twin) */}
         <div className="lg:col-span-4 p-5 overflow-y-auto flex flex-col space-y-4">
           {/* Tab Selector Buttons */}
-          <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl">
+          <div className="flex items-center gap-1.5 p-1.5 bg-[#111c30] border border-[#1e2e4a] rounded-2xl">
             <button
               onClick={() => setActiveTab('ai')}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex-1 min-h-[44px] flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all focus-ring ${
                 activeTab === 'ai'
-                  ? 'bg-cyan-600 text-white shadow-md'
+                  ? 'bg-sky-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-4 h-4" />
               <span>AI Inspector</span>
             </button>
             <button
               onClick={() => setActiveTab('pdf')}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex-1 min-h-[44px] flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all focus-ring ${
                 activeTab === 'pdf'
-                  ? 'bg-cyan-600 text-white shadow-md'
+                  ? 'bg-sky-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
               }`}
             >
-              <FileText className="w-3.5 h-3.5" />
+              <FileText className="w-4 h-4" />
               <span>Service Manual</span>
             </button>
             <button
               onClick={() => setActiveTab('digital-twin')}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex-1 min-h-[44px] flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all focus-ring ${
                 activeTab === 'digital-twin'
-                  ? 'bg-cyan-600 text-white shadow-md'
+                  ? 'bg-sky-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
               }`}
             >
-              <Compass className="w-3.5 h-3.5" />
+              <Compass className="w-4 h-4" />
               <span>3D Twin</span>
             </button>
           </div>
@@ -810,10 +806,10 @@ export default function CaseWorkspacePage({
           {/* TAB 1: AI DIAGNOSTIC REASONING INSPECTOR */}
           {activeTab === 'ai' && (
             <div className="space-y-4 flex-1">
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+              <div className="p-4 rounded-2xl bg-[#111c30] border border-[#1e2e4a] space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-cyan-400" />
+                    <Sparkles className="w-4 h-4 text-sky-400" />
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                       Multi-Step Evidence Reasoning
                     </span>
@@ -821,12 +817,12 @@ export default function CaseWorkspacePage({
                   <button
                     onClick={handleRunAgent}
                     disabled={agentLoading}
-                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-50"
+                    className="min-h-[38px] px-3.5 py-1.5 text-xs font-bold rounded-xl bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-50 transition focus-ring"
                   >
                     {agentLoading ? 'Reasoning...' : 'Run Analysis'}
                   </button>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Retrieves clinical ground truth, equipment ontology, and active measurements into a multi-step structured diagnostic reasoning trace.
                 </p>
               </div>
@@ -834,9 +830,9 @@ export default function CaseWorkspacePage({
               {agentResult ? (
                 <div className="space-y-3">
                   {/* Facts */}
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 space-y-1.5">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-blue-400" />
+                  <div className="p-4 rounded-xl bg-[#111c30] border border-[#1e2e4a] space-y-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-sky-400" />
                       <span>Documented Facts</span>
                     </div>
                     <ul className="text-xs text-slate-300 space-y-1 pl-3 list-disc">
@@ -847,8 +843,8 @@ export default function CaseWorkspacePage({
                   </div>
 
                   {/* Observations */}
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 space-y-1.5">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                  <div className="p-4 rounded-xl bg-[#111c30] border border-[#1e2e4a] space-y-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-400" />
                       <span>Historical Observations</span>
                     </div>
@@ -860,9 +856,9 @@ export default function CaseWorkspacePage({
                   </div>
 
                   {/* Rules */}
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 space-y-1.5">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                  <div className="p-4 rounded-xl bg-[#111c30] border border-[#1e2e4a] space-y-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-teal-400" />
                       <span>Tolerance Rules</span>
                     </div>
                     <ul className="text-xs text-slate-300 space-y-1 pl-3 list-disc">
@@ -873,23 +869,23 @@ export default function CaseWorkspacePage({
                   </div>
 
                   {/* Hypotheses */}
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 space-y-2">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-red-400" />
+                  <div className="p-4 rounded-xl bg-[#111c30] border border-[#1e2e4a] space-y-2.5">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-rose-400" />
                       <span>Differential Hypotheses</span>
                     </div>
                     <div className="space-y-2">
                       {agentResult.hypotheses.map((h, i) => (
-                        <div key={i} className="p-2.5 rounded bg-slate-950 border border-slate-800 text-xs">
-                          <div className="flex items-center justify-between mb-1">
+                        <div key={i} className="p-3 rounded-xl bg-[#0a1120] border border-[#1e2e4a] text-xs">
+                          <div className="flex items-center justify-between mb-1.5">
                             <span className="font-semibold text-slate-200">{h.hypothesis}</span>
-                            <span className="font-mono font-bold text-red-400">
+                            <span className="font-telemetry font-bold text-rose-400">
                               {(h.probability * 100).toFixed(0)}%
                             </span>
                           </div>
                           <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden mb-1.5">
                             <div
-                              className="h-full bg-red-500 rounded-full"
+                              className="h-full bg-rose-500 rounded-full"
                               style={{ width: `${h.probability * 100}%` }}
                             />
                           </div>
@@ -900,19 +896,19 @@ export default function CaseWorkspacePage({
                   </div>
 
                   {/* Recommended Actions */}
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800/80 space-y-2">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                  <div className="p-4 rounded-xl bg-[#111c30] border border-[#1e2e4a] space-y-2.5">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400" />
                       <span>Action Plan</span>
                     </div>
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {agentResult.recommendedActions.map((a, i) => (
-                        <div key={i} className="p-2 rounded bg-slate-950 border border-slate-800 text-xs flex items-start gap-2">
-                          <CornerDownRight className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                        <div key={i} className="p-2.5 rounded-xl bg-[#0a1120] border border-[#1e2e4a] text-xs flex items-start gap-2.5">
+                          <CornerDownRight className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                           <div>
-                            <span className="text-slate-200 block">{a.action}</span>
+                            <span className="text-slate-200 block font-medium">{a.action}</span>
                             {a.requiresApproval && (
-                              <span className="inline-block mt-0.5 px-1.5 py-0.2 rounded text-[9px] font-bold bg-purple-950 text-purple-300 border border-purple-800">
+                              <span className="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-800">
                                 Requires Approval Gate
                               </span>
                             )}
@@ -923,7 +919,7 @@ export default function CaseWorkspacePage({
                   </div>
                 </div>
               ) : (
-                <div className="p-8 text-center rounded-xl bg-slate-900/50 border border-slate-800 text-slate-400 text-xs">
+                <div className="p-8 text-center rounded-2xl bg-[#111c30] border border-[#1e2e4a] text-slate-400 text-xs">
                   Click &ldquo;Run Analysis&rdquo; to launch deterministic multi-step diagnostic reasoning on this case.
                 </div>
               )}
@@ -961,49 +957,49 @@ export default function CaseWorkspacePage({
       {/* APPROVAL GATE MODAL */}
       {showApprovalModal && pendingApprovals.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
-            <div className="flex items-center gap-3 text-purple-400">
-              <ShieldAlert className="w-6 h-6" />
+          <div className="w-full max-w-lg bg-[#111c30] border border-[#2a3d60] rounded-2xl p-7 shadow-2xl space-y-5">
+            <div className="flex items-center gap-3 text-amber-400">
+              <ShieldAlert className="w-7 h-7" />
               <div>
-                <h3 className="text-lg font-bold text-white">Consequential Action Authorization</h3>
+                <h3 className="text-xl font-bold text-white">Consequential Action Authorization</h3>
                 <p className="text-xs text-slate-400">Human-in-the-Loop Field Approval Gate</p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               {pendingApprovals.map((appr) => (
-                <div key={appr.id} className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                <div key={appr.id} className="p-4 rounded-xl bg-[#0a1120] border border-[#1e2e4a] space-y-2.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-purple-300">{appr.actionType}</span>
-                    <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-800">
+                    <span className="font-mono font-bold text-amber-300">{appr.actionType}</span>
+                    <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-800">
                       PENDING
                     </span>
                   </div>
                   <h4 className="font-semibold text-white text-sm">{appr.targetEntity}</h4>
-                  <p className="text-xs text-slate-300">{appr.justification}</p>
+                  <p className="text-xs text-slate-300 leading-relaxed">{appr.justification}</p>
 
                   <div className="pt-2">
-                    <label className="block text-[11px] font-medium text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Authorizing Sign-Off Name:
                     </label>
                     <input
                       type="text"
                       value={approvalApproverName}
                       onChange={(e) => setApprovalApproverName(e.target.value)}
-                      className="w-full px-3 py-1.5 text-xs bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
+                      className="w-full px-3.5 py-2.5 text-xs bg-[#111c30] border border-[#1e2e4a] rounded-xl text-slate-100 focus-ring outline-none"
                     />
                   </div>
 
-                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+                  <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#1e2e4a]">
                     <button
                       onClick={() => handleGrantApproval(appr.id, 'REJECT')}
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-red-300 border border-slate-700"
+                      className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-300 border border-slate-700 focus-ring transition"
                     >
                       Reject Request
                     </button>
                     <button
                       onClick={() => handleGrantApproval(appr.id, 'APPROVE')}
-                      className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950"
+                      className="min-h-[44px] px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/40 focus-ring transition"
                     >
                       Grant Authorization
                     </button>
@@ -1015,7 +1011,7 @@ export default function CaseWorkspacePage({
             <div className="text-right">
               <button
                 onClick={() => setShowApprovalModal(false)}
-                className="px-4 py-2 text-xs text-slate-400 hover:text-slate-200"
+                className="px-4 py-2 text-xs text-slate-400 hover:text-slate-200 transition"
               >
                 Close Window
               </button>
@@ -1027,11 +1023,11 @@ export default function CaseWorkspacePage({
       {/* FIELD SERVICE REPORT MODAL */}
       {showReportModal && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl flex flex-col max-h-[85vh]">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <div className="flex items-center gap-2.5">
-                <FileText className="w-5 h-5 text-cyan-400" />
-                <h3 className="text-lg font-bold text-white">Field Service Intervention Report</h3>
+          <div className="w-full max-w-3xl bg-[#111c30] border border-[#2a3d60] rounded-2xl p-7 shadow-2xl flex flex-col max-h-[85vh]">
+            <div className="flex items-center justify-between pb-4 border-b border-[#1e2e4a]">
+              <div className="flex items-center gap-3">
+                <FileText className="w-6 h-6 text-sky-400" />
+                <h3 className="text-xl font-bold text-white">Field Service Intervention Report</h3>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -1040,36 +1036,36 @@ export default function CaseWorkspacePage({
                     setCopiedReport(true);
                     setTimeout(() => setCopiedReport(false), 2000);
                   }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0a1120] hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-[#1e2e4a] focus-ring"
                 >
-                  <Copy className="w-3.5 h-3.5 text-cyan-400" />
+                  <Copy className="w-4 h-4 text-sky-400" />
                   <span>{copiedReport ? 'Copied!' : 'Copy Markdown'}</span>
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0a1120] hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-[#1e2e4a] focus-ring"
                 >
-                  <Printer className="w-3.5 h-3.5 text-cyan-400" />
+                  <Printer className="w-4 h-4 text-sky-400" />
                   <span>Print</span>
                 </button>
                 <button
                   onClick={() => setShowReportModal(false)}
-                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white"
+                  className="p-2 rounded-xl bg-[#0a1120] hover:bg-slate-800 text-slate-400 hover:text-white border border-[#1e2e4a]"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto my-4 p-5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed">
+            <div className="flex-1 overflow-y-auto my-4 p-5 rounded-xl bg-[#0a1120] border border-[#1e2e4a] font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed">
               {reportMarkdown}
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-slate-800 text-xs text-slate-400">
+            <div className="flex items-center justify-between pt-3 border-t border-[#1e2e4a] text-xs text-slate-400">
               <span>Authoritative Return-to-Service document signed by FSE {serviceCase.engineerName}</span>
               <button
                 onClick={() => setShowReportModal(false)}
-                className="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs"
+                className="btn-touch-56 px-6 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs focus-ring"
               >
                 Done
               </button>

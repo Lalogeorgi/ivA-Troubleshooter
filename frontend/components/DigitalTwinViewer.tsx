@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Box, Layers, RotateCcw, ZoomIn, ZoomOut, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Box, RotateCcw } from 'lucide-react';
 
 interface DigitalTwinViewerProps {
   activeMeshNodeId?: string | null;
@@ -39,7 +39,7 @@ export function DigitalTwinViewer({
     const height = container.clientHeight || 400;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a); // Slate-900
+    scene.background = new THREE.Color(0x0a1120); // Nocturnal Slate
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -291,7 +291,7 @@ export function DigitalTwinViewer({
 
     // 5. Animation Loop
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -348,26 +348,26 @@ export function DigitalTwinViewer({
   }, [isRotating, activeMeshNodeId, selectedNode, onSelectComponent]);
 
   return (
-    <div className="flex flex-col h-full bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+    <div className="flex flex-col h-full bg-[#0a1120] border border-[#1e2e4a] rounded-2xl overflow-hidden shadow-xl">
       {/* 3D Viewport Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <Box className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-200">
+      <div className="flex items-center justify-between px-4 py-3 bg-[#111c30] border-b border-[#1e2e4a]">
+        <div className="flex items-center gap-2.5">
+          <Box className="w-4 h-4 text-sky-400" />
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
             Spatial Digital Twin (BioMed X200)
           </span>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsRotating(!isRotating)}
-            className={`px-2.5 py-1 text-xs rounded border transition-colors ${
+            className={`min-h-[36px] px-3 py-1.5 text-xs font-mono font-semibold rounded-xl border transition-colors focus-ring ${
               isRotating
-                ? 'bg-cyan-950/70 border-cyan-700 text-cyan-300'
-                : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200'
+                ? 'bg-sky-950/80 border-sky-700/60 text-sky-300'
+                : 'bg-[#0a1120] border-[#1e2e4a] text-slate-400 hover:text-slate-200'
             }`}
             title="Toggle Auto Rotation"
           >
-            <RotateCcw className="w-3.5 h-3.5 inline mr-1" />
+            <RotateCcw className="w-3.5 h-3.5 inline mr-1.5" />
             {isRotating ? 'Rotating' : 'Paused'}
           </button>
         </div>
@@ -377,57 +377,57 @@ export function DigitalTwinViewer({
       <div className="relative flex-1 min-h-[360px] cursor-grab active:cursor-grabbing" ref={containerRef}>
         {/* Floating Component HUD Overlay */}
         <div className="absolute bottom-3 left-3 right-3 pointer-events-none flex items-end justify-between">
-          <div className="bg-slate-900/90 backdrop-blur border border-slate-700/80 rounded-lg p-3 text-xs shadow-lg max-w-sm">
-            <div className="text-slate-400 uppercase tracking-wider font-mono text-[10px] mb-1">
+          <div className="bg-[#111c30]/95 backdrop-blur-md border border-[#2a3d60] rounded-xl p-3.5 text-xs shadow-xl max-w-sm pointer-events-auto">
+            <div className="text-slate-400 uppercase tracking-wider font-mono text-[10px] mb-1 font-semibold">
               Active Spatial Inspection
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
-              <span className="font-semibold text-slate-100 text-sm">
+              <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50" />
+              <span className="font-bold text-white text-sm">
                 {selectedNode ? selectedNode : 'Overview Mode (All Subsystems)'}
               </span>
             </div>
             {selectedNode === 'PUMP_P102' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 Syringe Dispense Pump P-102 (P/N 948-230-01). Bay BAY-FL-01. Stepper motor CAN node 12.
               </p>
             )}
             {selectedNode === 'SENSOR_PS23' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 Line Pressure Transducer PS-23 (P/N 948-510-23). Nominal 114–126 kPa. Analog 4–20mA.
               </p>
             )}
             {selectedNode === 'VALVE_V04' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 3-Way Pinch Valve V-04 (P/N 948-112-04). GPIO High-Side driver. Fluidics manifold block.
               </p>
             )}
             {selectedNode === 'LAMP_LS01' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 Pre-focused 12V 20W Tungsten-Halogen Source LS-01. Photometer bench BAY-OP-01.
               </p>
             )}
             {selectedNode === 'FLOWCELL_FC01' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 Quartz Micro Flow Cell FC-01 (10mm path length). Absorbance 340–800nm.
               </p>
             )}
             {selectedNode === 'ARM_SAMPLE' && (
-              <p className="mt-1 text-slate-300 text-[11px]">
+              <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
                 Dual-axis robotic pipettor tower ARM-01 with Z-axis optical flag sensor.
               </p>
             )}
           </div>
 
-          <div className="bg-slate-900/80 backdrop-blur border border-slate-700/80 rounded px-2 py-1 text-[10px] text-slate-400 font-mono">
+          <div className="bg-[#111c30]/90 backdrop-blur border border-[#1e2e4a] rounded-lg px-2.5 py-1 text-[10px] text-slate-400 font-mono">
             Drag to Orbit • Scroll to Zoom
           </div>
         </div>
       </div>
 
       {/* Component Quick Selector Tabs */}
-      <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-900 border-t border-slate-800 overflow-x-auto text-xs">
-        <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold mr-1">
+      <div className="flex items-center gap-2 px-3 py-2.5 bg-[#111c30] border-t border-[#1e2e4a] overflow-x-auto text-xs">
+        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold mr-1 shrink-0">
           Jump to:
         </span>
         {[
@@ -444,10 +444,10 @@ export function DigitalTwinViewer({
               setSelectedNode(item.id);
               if (onSelectComponent) onSelectComponent(item.id);
             }}
-            className={`px-2.5 py-1 rounded text-xs whitespace-nowrap transition-all ${
+            className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-mono whitespace-nowrap transition-all focus-ring ${
               selectedNode === item.id
-                ? 'bg-red-500/20 text-red-300 border border-red-500/50 font-medium'
-                : 'bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/50'
+                ? 'bg-sky-500/20 text-sky-300 border border-sky-500/50 font-bold'
+                : 'bg-[#0a1120] text-slate-400 hover:text-slate-200 border border-[#1e2e4a]'
             }`}
           >
             {item.label}

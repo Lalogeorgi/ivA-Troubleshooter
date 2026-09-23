@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ivA-Troubleshooter — Frontend Application
 
-## Getting Started
+This directory contains the user interface for **ivA-Troubleshooter**, an open-source, AI-native medical device service intelligence and diagnostic troubleshooting platform.
 
-First, run the development server:
+For full project overview, stakeholder value guides, and knowledge vault documentation, see the [Root README](../README.md).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠️ Technology Stack
+* **Framework**: [Next.js 16.1 (App Router)](https://nextjs.org/)
+* **UI Runtime**: [React 19.2](https://react.dev/)
+* **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with ivA Clinical Design Tokens
+* **3D Spatial Graphics**: [Three.js](https://threejs.org/) WebGL Canvas
+* **Iconography**: [Lucide React](https://lucide.dev/)
+* **Typography**: Geist Sans & Geist Mono with Tabular Monospace Numerics
+
+---
+
+## 📁 Directory Structure
+```
+frontend/
+├── app/
+│   ├── globals.css                # Clinical design tokens, 56px touch ergonomics, focus rings
+│   ├── layout.tsx                 # Root layout, fonts, and ivA-Troubleshooter metadata
+│   ├── page.tsx                   # Central landing portal & telemetry summary
+│   ├── workspace/                 # FSE Case Operations Center
+│   │   ├── page.tsx               # Active field cases list & case creation modal
+│   │   └── [caseId]/page.tsx      # Diagnostic stepper, live tolerances, approval gates, RTS report
+│   ├── vault/                     # Clinical Knowledge Vault Explorer
+│   │   ├── page.tsx               # Entity category filter, search & sync trigger
+│   │   └── [id]/page.tsx          # Entity viewer with bidirectional wikilink graph edges
+│   ├── machine-context/           # Legacy equipment serial number & intervention setup
+│   └── intervention-session/      # Legacy diagnostic and procedure sessions
+├── components/
+│   ├── DigitalTwinViewer.tsx      # Interactive Three.js 3D spatial digital twin (BioMed X200)
+│   └── DocumentViewer.tsx         # Layout-aware PDF manual & AI provenance chunk viewer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-## Learn More
+### 2. Run the Development Server
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Production Build & Linting
+```bash
+# Verify TypeScript and create production bundle
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run ESLint
+npm run lint
+```

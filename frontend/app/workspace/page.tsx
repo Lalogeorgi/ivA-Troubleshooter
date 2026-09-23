@@ -6,14 +6,13 @@ import {
   Wrench,
   AlertCircle,
   Clock,
-  CheckCircle2,
   Plus,
   ArrowRight,
   Activity,
   Building2,
-  FileText,
   Search,
-  SlidersHorizontal,
+  BookOpen,
+  X,
 } from 'lucide-react';
 import {
   fetchCases,
@@ -68,7 +67,7 @@ export default function WorkspaceDashboard() {
 
     setSubmitting(true);
     try {
-      const created = await createCase({
+      await createCase({
         assetId: newAssetId,
         engineerId: newEngineerId,
         engineerName: newEngineerName,
@@ -107,37 +106,70 @@ export default function WorkspaceDashboard() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'ARRIVED':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/60 text-blue-300 border border-blue-700/50">ARRIVED</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-sky-950/80 text-sky-300 border border-sky-700/60">
+            ARRIVED
+          </span>
+        );
       case 'DIAGNOSING':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-900/60 text-amber-300 border border-amber-700/50 animate-pulse">DIAGNOSING</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-amber-950/80 text-amber-300 border border-amber-600/60">
+            DIAGNOSING
+          </span>
+        );
       case 'AWAITING_PARTS':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900/60 text-red-300 border border-red-700/50">AWAITING PARTS</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60">
+            AWAITING PARTS
+          </span>
+        );
       case 'REPAIRING':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-900/60 text-purple-300 border border-purple-700/50">REPAIRING</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-600/60">
+            REPAIRING
+          </span>
+        );
       case 'VERIFYING':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-900/60 text-cyan-300 border border-cyan-700/50">VERIFYING</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-700/60">
+            VERIFYING
+          </span>
+        );
       case 'COMPLETED':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-900/60 text-emerald-300 border border-emerald-700/50">COMPLETED</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-600/60">
+            COMPLETED
+          </span>
+        );
       default:
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300">{status}</span>;
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">
+            {status}
+          </span>
+        );
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-10">
+    <div className="min-h-screen bg-[#0a1120] text-slate-100 p-6 md:p-10">
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-slate-800">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-[#1e2e4a]">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
-              <Wrench className="w-6 h-6" />
+          <div className="flex items-center gap-2 mb-1.5">
+            <Link href="/" className="text-xs font-mono font-semibold text-sky-400 hover:underline">
+              &larr; ivA-Troubleshooter Home
+            </Link>
+          </div>
+          <div className="flex items-center gap-3.5">
+            <div className="p-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 text-sky-400">
+              <Wrench className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+              <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
                 FSE Case Operations Center
               </h1>
               <p className="text-sm text-slate-400 mt-0.5">
-                Field Service Engineering active case management & precision diagnostic dispatch
+                Field Service Engineering active interventions & precision diagnostic execution
               </p>
             </div>
           </div>
@@ -146,16 +178,17 @@ export default function WorkspaceDashboard() {
         <div className="flex items-center gap-3">
           <Link
             href="/vault"
-            className="px-4 py-2 text-sm font-medium rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 transition-colors"
+            className="btn-touch-56 px-5 rounded-xl border border-slate-700 bg-slate-900/90 hover:bg-slate-800 text-slate-200 text-sm font-semibold transition focus-ring"
           >
-            Knowledge Vault
+            <BookOpen className="w-4 h-4 text-emerald-400 mr-2" />
+            <span>Knowledge Vault</span>
           </Link>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-950 transition-all"
+            className="btn-touch-56 px-6 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-sm font-semibold shadow-lg shadow-sky-600/25 transition focus-ring flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            New Service Case
+            <span>New Service Case</span>
           </button>
         </div>
       </div>
@@ -163,46 +196,54 @@ export default function WorkspaceDashboard() {
       <div className="max-w-7xl mx-auto py-8">
         {/* Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 shadow">
-            <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Field Cases</div>
-            <div className="text-2xl font-bold text-white mt-1">{stats.total}</div>
+          <div className="p-5 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">
+              Total Field Cases
+            </div>
+            <div className="text-3xl font-bold font-telemetry text-white mt-1.5">{stats.total}</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 shadow">
-            <div className="text-xs font-medium text-amber-400 uppercase tracking-wider">In Diagnosis / Repair</div>
-            <div className="text-2xl font-bold text-amber-300 mt-1">{stats.diagnosing}</div>
+          <div className="p-5 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-mono font-medium text-amber-400 uppercase tracking-wider">
+              In Diagnosis / Repair
+            </div>
+            <div className="text-3xl font-bold font-telemetry text-amber-300 mt-1.5">{stats.diagnosing}</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 shadow">
-            <div className="text-xs font-medium text-red-400 uppercase tracking-wider">Awaiting Parts / Gate</div>
-            <div className="text-2xl font-bold text-red-300 mt-1">{stats.awaitingParts}</div>
+          <div className="p-5 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-mono font-medium text-rose-400 uppercase tracking-wider">
+              Awaiting Parts / Gate
+            </div>
+            <div className="text-3xl font-bold font-telemetry text-rose-300 mt-1.5">{stats.awaitingParts}</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 shadow">
-            <div className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Completed / Signed</div>
-            <div className="text-2xl font-bold text-emerald-300 mt-1">{stats.completed}</div>
+          <div className="p-5 rounded-2xl bg-[#111c30] border border-[#1e2e4a] shadow-sm">
+            <div className="text-xs font-mono font-medium text-emerald-400 uppercase tracking-wider">
+              Completed / Signed
+            </div>
+            <div className="text-3xl font-bold font-telemetry text-emerald-300 mt-1.5">{stats.completed}</div>
           </div>
         </div>
 
         {/* Filter & Search Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="text"
               placeholder="Search case #, serial, hospital..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="w-full pl-10 pr-4 py-3 text-sm bg-[#111c30] border border-[#1e2e4a] rounded-xl text-slate-100 placeholder-slate-500 focus-ring outline-none"
             />
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
             {['ALL', 'DIAGNOSING', 'AWAITING_PARTS', 'REPAIRING', 'VERIFYING', 'COMPLETED'].map((st) => (
               <button
                 key={st}
                 onClick={() => setFilterStatus(st)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
+                className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-colors whitespace-nowrap focus-ring ${
                   filterStatus === st
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/50'
+                    : 'bg-[#111c30] text-slate-400 hover:text-slate-200 border border-[#1e2e4a]'
                 }`}
               >
                 {st.replace('_', ' ')}
@@ -213,9 +254,12 @@ export default function WorkspaceDashboard() {
 
         {/* Case List */}
         {loading ? (
-          <div className="p-12 text-center text-slate-400">Loading field cases...</div>
+          <div className="p-16 text-center text-slate-400">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500 mx-auto mb-3"></div>
+            <span>Loading field service cases...</span>
+          </div>
         ) : filteredCases.length === 0 ? (
-          <div className="p-12 text-center rounded-xl bg-slate-900/50 border border-slate-800 text-slate-400">
+          <div className="p-16 text-center rounded-2xl bg-[#111c30] border border-[#1e2e4a] text-slate-400">
             No service cases found matching criteria.
           </div>
         ) : (
@@ -224,46 +268,46 @@ export default function WorkspaceDashboard() {
               <Link
                 key={c.id}
                 href={`/workspace/${c.id}`}
-                className="group flex flex-col justify-between p-5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all shadow-lg hover:shadow-cyan-950/20"
+                className="group flex flex-col justify-between p-6 rounded-2xl bg-[#111c30] border border-[#1e2e4a] hover:border-sky-500/60 transition-all shadow-md focus-ring"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="font-mono text-xs font-semibold text-cyan-400 tracking-wide">
+                  <div className="flex items-center justify-between gap-2 mb-3.5">
+                    <span className="font-mono text-xs font-bold text-sky-400 tracking-wide">
                       {c.caseNumber}
                     </span>
                     {getStatusBadge(c.status)}
                   </div>
 
-                  <h3 className="font-semibold text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
+                  <h3 className="font-semibold text-white group-hover:text-sky-300 transition-colors line-clamp-2 text-base leading-snug">
                     {c.symptomDescription}
                   </h3>
 
                   {c.initialErrorCode && (
-                    <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-mono bg-red-950/50 text-red-400 border border-red-800/40">
-                      <AlertCircle className="w-3 h-3" />
+                    <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono bg-rose-950/60 text-rose-300 border border-rose-800/50">
+                      <AlertCircle className="w-3.5 h-3.5" />
                       Alarm Code: {c.initialErrorCode}
                     </div>
                   )}
 
-                  <div className="mt-4 pt-3 border-t border-slate-800/80 space-y-1.5 text-xs text-slate-400">
+                  <div className="mt-4 pt-3.5 border-t border-[#1e2e4a] space-y-2 text-xs text-slate-400">
                     <div className="flex items-center gap-2">
-                      <Building2 className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{c.asset?.site?.name || 'Site unassigned'}</span>
+                      <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="truncate">{c.asset?.site?.name || 'Site unassigned'}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Activity className="w-3.5 h-3.5 text-slate-500" />
-                      <span>
+                      <Activity className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="truncate">
                         Asset: <strong className="text-slate-200">{c.asset?.serialNumber}</strong> ({c.asset?.instrument?.model || 'Clinical Analyzer'})
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-3.5 h-3.5 text-slate-500" />
-                      <span>Assigned to: {c.engineerName}</span>
+                      <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="truncate">FSE: {c.engineerName}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-medium text-cyan-400 group-hover:translate-x-0.5 transition-transform">
+                <div className="mt-6 pt-3.5 border-t border-[#1e2e4a] flex items-center justify-between text-xs font-semibold text-sky-400 group-hover:translate-x-1 transition-transform">
                   <span>Enter Diagnostic Workspace</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -275,23 +319,31 @@ export default function WorkspaceDashboard() {
 
       {/* New Case Creation Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
-            <h2 className="text-lg font-bold text-white mb-1">Create Field Service Case</h2>
-            <p className="text-xs text-slate-400 mb-5">
-              Register an on-site hospital intervention and associate with a clinical instrument.
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-[#111c30] border border-[#2a3d60] rounded-2xl p-7 shadow-2xl">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-xl font-bold text-white">Create Field Service Case</h2>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <p className="text-xs text-slate-400 mb-6">
+              Register an on-site intervention and associate with a clinical instrument.
             </p>
 
             <form onSubmit={handleCreateCase} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                   Target Installed Asset *
                 </label>
                 <select
                   value={newAssetId}
                   onChange={(e) => setNewAssetId(e.target.value)}
                   required
-                  className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3.5 py-3 text-sm bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-100 focus-ring outline-none"
                 >
                   {assets.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -301,9 +353,9 @@ export default function WorkspaceDashboard() {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                     Engineer ID
                   </label>
                   <input
@@ -311,11 +363,11 @@ export default function WorkspaceDashboard() {
                     value={newEngineerId}
                     onChange={(e) => setNewEngineerId(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-3.5 py-3 text-sm bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-100 focus-ring outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                     Engineer Name
                   </label>
                   <input
@@ -323,13 +375,13 @@ export default function WorkspaceDashboard() {
                     value={newEngineerName}
                     onChange={(e) => setNewEngineerName(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-3.5 py-3 text-sm bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-100 focus-ring outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                   Initial Alarm Code (Optional)
                 </label>
                 <input
@@ -337,13 +389,12 @@ export default function WorkspaceDashboard() {
                   placeholder="e.g. E1045, E1201"
                   value={newErrorCode}
                   onChange={(e) => setNewErrorCode(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
-                >
-                </input>
+                  className="w-full px-3.5 py-3 text-sm bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-100 placeholder-slate-500 focus-ring outline-none font-mono"
+                />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                   Reported Symptom / Problem Description *
                 </label>
                 <textarea
@@ -352,22 +403,22 @@ export default function WorkspaceDashboard() {
                   onChange={(e) => setNewSymptom(e.target.value)}
                   placeholder="Describe observed fault, laboratory test interruption, or fluidics error..."
                   required
-                  className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3.5 py-3 text-sm bg-[#0a1120] border border-[#1e2e4a] rounded-xl text-slate-100 placeholder-slate-500 focus-ring outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1e2e4a]">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 text-sm rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300"
+                  className="btn-touch-56 px-5 text-sm rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 text-sm font-semibold rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-50"
+                  className="btn-touch-56 px-6 text-sm font-semibold rounded-xl bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-50 transition shadow-lg shadow-sky-600/25"
                 >
                   {submitting ? 'Creating Case...' : 'Create Service Case'}
                 </button>

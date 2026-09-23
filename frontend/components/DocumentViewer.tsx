@@ -1,6 +1,6 @@
 'use client';
 
-import { X, ExternalLink, FileText, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, AlertTriangle, Layers } from 'lucide-react';
+import { X, ExternalLink, FileText, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { DocumentPageDetail, fetchDocumentPage, getDocumentPdfUrl, fetchDocuments } from '../app/lib/api';
 

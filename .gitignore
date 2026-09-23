@@ -38,6 +38,14 @@ build/Release
 node_modules/
 jspm_packages/
 docs/
+/README.md
+
+# Impeccable, UI Audits, and Styling Documentation (DO NOT COMMIT)
+.impeccable/
+impeccable/
+docs/audit/
+docs/styling/
+*.audit.md
 
 
 # TypeScript v1 declaration files
